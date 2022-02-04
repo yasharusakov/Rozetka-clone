@@ -1,0 +1,25 @@
+// Подключение переменных
+@import './variables.scss';
+
+// Подключение шрифтов
+@mixin font($font_name, $file_name, $weight, $style) {
+    @font-face {
+        font-family: $font_name;
+        font-display: swap;
+        src: url("../fonts/#{$file_name}.ttf") format("ttf"), url("../fonts/#{$file_name}.ttf") format("ttf");
+        font-weight: #{$weight};
+        font-style: #{$style};
+    }
+}
+
+// Адаптивный шрифт
+@mixin adaptiv-font($pcSize, $mobSize) {
+    $addSize: $pcSize - $mobSize;
+    $container: $container - 320;
+    font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$container}));
+}
+
+// Адаптивное свойство
+@mixin adaptive-prop($propetry, $mobSize, $pctSize) {
+    #{$propetry}: calc(#{$mobSize + px} + (#{$pctSize} - #{$mobSize}) * ((100vw - 320px) / (#{$container} - 320)));
+}
