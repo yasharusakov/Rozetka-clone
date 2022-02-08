@@ -1,0 +1,39 @@
+.spoiler {
+    &-title {
+        cursor: pointer;
+        position: relative;
+        &:before, &:after {
+            position: absolute;
+            content: "";
+            top: 50%;
+            width: 2px;
+            height: 8px;
+            background: #000;
+            transition: 0.3s ease-out;
+        }
+        &::before {
+            transform: translateY(-50%) rotate(-45deg);
+            right: 18px;
+        }
+        &::after {
+            transform: translateY(-50%) rotate(45deg);
+            right: 14px;
+        }
+        &.active-spoiler {
+            &:before {
+                transform: rotate(45deg);
+            }
+            &:after {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+    &-links {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    &-link {
+
+    }
+}

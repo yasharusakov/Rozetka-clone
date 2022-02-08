@@ -3,13 +3,24 @@ import basket from '../../resources/images/basket.png';
 import catalog from '../../resources/images/catalog.png';
 import user from '../../resources/images/user.png';
 import rozetka from '../../resources/svg/rozetka.svg';
+import { useState } from 'react';
+import BurgerPanel from '../BurgerPanel';
+
 import './Header.scss';
 
 function Header() {
+    const [open, setOpen] = useState(false);
+
+    if (open) {
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "";
+    }
+
     return (
         <header className="header wrapper__header">
             <div className="header__container">
-                <div className="header__burger">
+                <div onClick={() => setOpen(true)} className="header__burger">
                     <div className="header__burger-icon">
                         <span></span>
                     </div>
@@ -32,6 +43,7 @@ function Header() {
                     <img src={basket} alt="basket" />
                 </div>
             </div>
+            <BurgerPanel open={open} setOpen={setOpen} />
         </header>
     )
 }

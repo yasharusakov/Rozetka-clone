@@ -1,0 +1,216 @@
+@import '../../styles/mixins.scss';
+
+.burger-panel {
+    position: fixed;
+    background: rgba(0,0,0,0.8);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: 0.3s ease;
+    z-index: 10;
+    transition: 0.4s ease 0.05s;
+    .burger-panel-title {
+        font-size: 15px;
+        color: $global-black-40;
+    }
+    .burger-panel-padding {
+        padding: 5px 15px;
+    }
+    &__container {
+        width: 320px;
+        transform: translateX(-100%);
+        transition: 0.5s ease;
+        height: 100%;
+        @media screen and (max-width: 370px) {
+            width: 100%;
+        }
+    }
+    &__content {
+        overflow-y: auto;
+        width: 100%;
+        height: 100%;
+        background: $white;
+    }
+    &__top {
+        background: $global-black;
+        padding: 15px;
+        &__smth {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            img {
+                width: 150px;
+                height: 30px;
+            }
+            &-close {
+                cursor: pointer;
+                svg {
+                    color: $white;
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+        &__auth {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &-item_1 {
+                margin-top: 20px;
+                margin-right: 20px;
+                background: $global-black-60;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 40px;
+                min-width: 40px;
+                height: 40px;
+                padding: 5px;
+                border-radius: 50%;
+            }
+            &-item_2 {
+                margin-top: 20px;
+                div {
+                    &:first-child {
+                        a {
+                            font-size: 14px;
+                            text-decoration: none;
+                            color: $white;
+                            &:last-child {
+                                position: relative;
+                                padding-left: 20px;
+                                &::before {
+                                    content: "";
+                                    position: absolute;
+                                    width: 1px;
+                                    height: 100%;
+                                    left: 10px;
+                                    top: 0;
+                                    background-color: $white;
+                                }
+                            }
+                        }
+                    }
+                    &:last-child {
+                        font-size: 13px;
+                        color: $global-black-60;
+                    }
+                }
+            }
+        }
+    }
+    &__actions {
+        &-action {
+            cursor: pointer;
+            padding: 3px 5px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            border-radius: 5px;
+            transition: 0.3s ease;
+            div {
+                margin-right: 20px;
+                width: 40px;
+                min-width: 40px;
+                height: 40px;
+                background: $global-black-10;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: 0.3s ease;
+                img {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+            h1 {
+                font-size: 14px;
+                font-weight: 400;
+            }
+            &:hover {
+                background: $global-green-20;
+                div {
+                    background: none;
+                }
+            }
+        }
+    }
+    &__information {
+        &-item {
+            display: flex;
+            flex-direction: column;
+            div, a {
+                &:first-child {
+                    margin: 0;
+                }
+                margin-top: 10px;
+            }
+            &-link {
+                @include adaptiv-font(18, 15);
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    &__spoilers {
+        user-select: none;
+        &__spoiler {
+            &-title {
+                padding-top: 10px;
+            }
+            &-links {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                &__spoiler-link {
+                    &:first-child {
+                        margin: 0;
+                    }
+                    @include adaptiv-font(18, 15);
+                    text-decoration: none;
+                    margin-top: 10px;
+                    cursor: pointer;
+                    color: $black;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+    &__our-apps {
+        &__apps {
+            margin-top: 10px;
+            display: flex;
+            img {
+                width: 100px;
+                height: 30px;
+                &:last-child {
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+    .line {
+        width: 100%;
+        height: 1px;
+        background: $global-black-10;
+        margin: 10px 0;
+    }
+    &-hide {
+        background: none;
+        visibility: hidden;
+    }
+    &-show {
+        background: rgba(0,0,0,0.8);
+        visibility: visible;
+        .burger-panel__container {
+            transform: translateX(0px);
+        }
+    }
+}
