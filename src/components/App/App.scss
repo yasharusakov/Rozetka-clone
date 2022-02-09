@@ -1,4 +1,15 @@
+@import '../../styles/variables.scss';
+
 .wrapper {
+    header {
+        position: sticky;
+        top: 0;
+    }
     &__container {
+        main {
+            margin: 0 auto;
+            max-width: #{$container - 60}px;
+            padding: 0 30px;
+        }
     }
 }

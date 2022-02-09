@@ -3,11 +3,11 @@ import catalog from '../../resources/images/catalog.png';
 import phone from '../../resources/images/phone.png';
 import question from '../../resources/images/question.png';
 import basket from '../../resources/images/basket.png';
-import GooglePlay from '../../resources/svg/Google-Play.svg';
-import AppStore from '../../resources/svg/App-Store.svg';
 import rozetka from '../../resources/svg/rozetka.svg';
 
 import spoiler from '../../utils/spoiler';
+import GooglePlay from '../../resources/svg/Google-Play.svg';
+import AppStore from '../../resources/svg/App-Store.svg';
 
 import './BurgerPanel.scss';
 

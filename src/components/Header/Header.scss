@@ -11,9 +11,10 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        max-width: 2000px;
+        max-width: #{$container - 60}px;
         align-items: center;
         min-height: 70px;
+        margin: 0 auto;
         > img, > form {
             margin: 0 20px;
         }
