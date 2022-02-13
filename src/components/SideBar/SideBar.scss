@@ -1,7 +1,6 @@
 @import '../../styles/mixins.scss';
 
 .sidebar {
-    width: 300px;
     border-right: 1px solid $global-black-10;
     &__container {
         .line {
@@ -35,6 +34,9 @@
                     text-decoration: underline;
                     color: $global-red;
                 }
+            }
+            &:first-child {
+                margin-top: 0;
             }
         }
     }

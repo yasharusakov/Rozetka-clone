@@ -1,0 +1,27 @@
+.slider {
+    width: 100%;
+    height: 300px;
+    @media screen and (max-width: 790px) {
+        height: 250px;
+    }
+    @media screen and (max-width: 600px) {
+        height: 220px;
+    }
+
+    &-slide {
+        cursor: pointer;
+        position: relative;
+        img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: unset;
+        }
+    }
+    &-button-next, &-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+}
