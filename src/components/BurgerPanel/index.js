@@ -9,9 +9,13 @@ import spoiler from '../../utils/spoiler';
 import GooglePlay from '../../resources/svg/Google-Play.svg';
 import AppStore from '../../resources/svg/App-Store.svg';
 
+import { setCatalog } from '../../slices/globalSlice';
+import { useDispatch } from 'react-redux';
+
 import './BurgerPanel.scss';
 
 function BurgerPanel({open, setOpen}) {
+    const dispatch = useDispatch();
 
     let classNames = "burger-panel";
 
@@ -24,7 +28,7 @@ function BurgerPanel({open, setOpen}) {
     return (
         <div onClick={(e) => {
             if (e.target.classList.contains('burger-panel')) {
-                setOpen(false)
+                setOpen(false);
             }
         }} className={classNames}>
             <div className="burger-panel__container">
@@ -52,7 +56,10 @@ function BurgerPanel({open, setOpen}) {
                         </div>
                     </section>
                     <section className="burger-panel__actions burger-panel-padding">
-                        <div className="burger-panel__actions-action">
+                        <div onClick={() => {
+                            setOpen(false);
+                            dispatch(setCatalog(true));
+                        }} className="burger-panel__actions-action">
                             <div>
                                 <img src={catalog} alt="catalog" />
                             </div>

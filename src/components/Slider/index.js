@@ -21,14 +21,15 @@ function Slider() {
     useEffect(() => {
         new Swiper('.swiper', {
             loop: true,
-            speed: 600,
+            autoplay: {
+                delay: 4000,
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false
+            },
+            speed: 900,
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
             }
         });
     }, [])
@@ -61,7 +62,6 @@ function Slider() {
                     <img src={slmsung} alt="slmsung" />
                 </div>
             </div>
-            <div className="swiper-pagination"></div>
             <div className="swiper-button-prev slider-button-prev">
                 <img src={prev} alt="prev" />
             </div>
