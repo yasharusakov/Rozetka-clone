@@ -71,11 +71,12 @@
             }
             &-item_2 {
                 margin-top: 20px;
-                div {
+                > div {
+                    display: flex;
                     &:first-child {
-                        a {
+                        div {
+                            cursor: pointer;
                             font-size: 14px;
-                            text-decoration: none;
                             color: $white;
                             &:last-child {
                                 position: relative;

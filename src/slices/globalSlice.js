@@ -1,21 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    catalog: false
+    burgerPanel: false,
+    catalog: false,
+    basket: false,
+    login: false,
+    register: false
 }
 
 const globalSlice = createSlice({
     name: 'global',
     initialState,
     reducers: {
-        setCatalog: (state, action) => {
-            state.catalog = action.payload;
-        }
+        setPopup: (state, action) => {
+            state[action.payload.name] = action.payload.type;
+        },
     }
 });
 
 export default globalSlice.reducer;
 
 export const {
-    setCatalog
+    setPopup
 } = globalSlice.actions;

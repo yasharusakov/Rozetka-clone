@@ -9,17 +9,22 @@ import spoiler from '../../utils/spoiler';
 import GooglePlay from '../../resources/svg/Google-Play.svg';
 import AppStore from '../../resources/svg/App-Store.svg';
 
-import { setCatalog } from '../../slices/globalSlice';
-import { useDispatch } from 'react-redux';
+import scroll from '../../utils/scroll';
+
+import { setPopup } from '../../slices/globalSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './BurgerPanel.scss';
 
-function BurgerPanel({open, setOpen}) {
+function BurgerPanel() {
     const dispatch = useDispatch();
+    const burgerPanel = useSelector(state => state.global.burgerPanel);
+
+    scroll(burgerPanel);
 
     let classNames = "burger-panel";
 
-    if (open) {
+    if (burgerPanel) {
         classNames += " burger-panel-show"
     } else {
         classNames += " burger-panel-hide";
@@ -28,7 +33,7 @@ function BurgerPanel({open, setOpen}) {
     return (
         <div onClick={(e) => {
             if (e.target.classList.contains('burger-panel')) {
-                setOpen(false);
+                dispatch(setPopup({name: 'burgerPanel', type: false}))
             }
         }} className={classNames}>
             <div className="burger-panel__container">
@@ -36,7 +41,7 @@ function BurgerPanel({open, setOpen}) {
                     <section className="burger-panel__top">
                         <div className="burger-panel__top__smth">
                             <img src={rozetka} alt="rozetka" />
-                            <div onClick={() => setOpen(false)} className="burger-panel__top__smth-close">
+                            <div onClick={() => dispatch(setPopup({name: 'burgerPanel', type: false}))} className="burger-panel__top__smth-close">
                                 <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path></svg>
                             </div>
                         </div>
@@ -46,8 +51,14 @@ function BurgerPanel({open, setOpen}) {
                             </div>
                             <div className="burger-panel__top__auth-item burger-panel__top__auth-item_2">
                                 <div className="burger-panel__top__auth-item__main">
-                                    <a href="">Вход</a> 
-                                    <a href="">Регистрация</a>
+                                    <div onClick={() => {
+                                        dispatch(setPopup({name: 'burgerPanel', type: false}))
+                                        dispatch(setPopup({name: 'user', type: true}));
+                                    }}>Вход</div> 
+                                    <div onClick={() => {
+                                        dispatch(setPopup({name: 'burgerPanel', type: false}))
+                                        dispatch(setPopup({name: 'register', type: true}));
+                                    }}>Регистрация</div>
                                 </div>
                                 <div className="burger-panel__top__auth-item__text">
                                     Авторизуйтесь для получения расширенных возможностей 
@@ -57,15 +68,18 @@ function BurgerPanel({open, setOpen}) {
                     </section>
                     <section className="burger-panel__actions burger-panel-padding">
                         <div onClick={() => {
-                            setOpen(false);
-                            dispatch(setCatalog(true));
+                            dispatch(setPopup({name: 'burgerPanel', type: false}))
+                            dispatch(setPopup({name: 'catalog', type: true}));
                         }} className="burger-panel__actions-action">
                             <div>
                                 <img src={catalog} alt="catalog" />
                             </div>
                             <h1>Каталок товаров</h1>
                         </div>
-                        <div className="burger-panel__actions-action">
+                        <div onClick={() => {
+                            dispatch(setPopup({name: 'burgerPanel', type: false}))
+                            dispatch(setPopup({name: 'basket', type: true}));
+                        }} className="burger-panel__actions-action">
                             <div>
                                 <img src={basket} alt="basket" />
                             </div>

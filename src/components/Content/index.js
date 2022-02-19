@@ -1,5 +1,4 @@
 import Slider from '../Slider';
-import Catalog from '../Catalog';
 
 import './Content.scss';
 
@@ -8,7 +7,6 @@ function Content() {
         <div className="content">
             <div className="content__container">
                 <Slider/>
-                <Catalog/>
             </div>
         </div>
     )
