@@ -1,0 +1,22 @@
+@import '../../styles/variables.scss';
+
+.basket {
+    &__container {
+
+    }
+    &__nothing {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &__title {
+            margin-top: 40px;
+            font-size: 24px;
+        }
+        &__sub-title {
+            margin-top: 20px;
+            font-size: 14px;
+            color: $global-black-40;
+        }
+    }
+}
