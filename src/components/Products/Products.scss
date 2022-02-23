@@ -1,0 +1,79 @@
+@import '../../styles/variables.scss';
+
+.products {
+    margin-top: 30px;
+    &__product {
+        margin-top: 70px;
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+    &__catagory-name {
+        font-size: 21px;
+    }
+    &__items {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+    &__item {
+        border: 1px solid $global-black-10;
+        border-left: none;
+        border-top: none;
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: 315px;
+        &-product {
+            margin-top: 10px;
+        }
+        &-heart {
+            padding: 7px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            img {
+                width: 18px;
+                height: 18px;
+            }
+            align-self: flex-end;
+            &:hover {
+                background: $global-green-10;
+            }
+        }
+        &-product {
+            cursor: pointer;
+        }
+        &-name {
+            margin-top: 30px;
+            font-size: 14.5px;
+            align-self: flex-start;
+            display: flex;
+            flex: 1 1 auto;
+            cursor: pointer;
+            &:hover {
+                color: $link-hover-color;
+            }
+        }
+        &-price {
+            margin-top: 30px;
+            align-self: flex-start;
+            &-initial-price {
+                font-size: 15px;
+                color: $global-black-40;
+                text-decoration: line-through;
+            }
+            &-stock-price {
+                font-size: 25px;
+                color: $global-red;
+            }
+            &-default-price {
+                font-size: 25px;
+            }
+        }
+    }
+}
