@@ -1,0 +1,15 @@
+@keyframes identifier {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.element-animation {
+}
+  
+.element-animation.element-show {
+    animation: identifier 0.2s ease forwards;
+}

@@ -2,77 +2,100 @@
 
 .products {
     margin-top: 30px;
-    &__product {
-        margin-top: 70px;
-        &:first-child {
-            margin-top: 0;
-        }
+    &__container {
+        display: flex;
+        flex-direction: column;
     }
-    &__catagory-name {
+    &__category-name {
         font-size: 21px;
     }
-    &__items {
-        margin-top: 10px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    }
-    &__item {
+    &__show-more {
+        cursor: pointer;
+        align-self: flex-end;
         border: 1px solid $global-black-10;
-        border-left: none;
         border-top: none;
-        padding: 15px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        height: 315px;
-        &-product {
-            margin-top: 10px;
+        background: none;
+        padding: 5px 40px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        color: $link-color;
+        &:hover {
+            color: $link-hover-color;
         }
-        &-heart {
-            padding: 7px;
-            border-radius: 5px;
+        @media screen and (max-width: 950px){
+            width: 100%;
+            align-self: center;
+            border: 1px solid $global-black-10;
+        }
+    }
+    &__items {
+        margin-top: 25px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        &__item {
+            border: 1px solid $global-black-10;
+            border-left: none;
+            border-top: none;
+            padding: 12.5px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            img {
-                width: 18px;
-                height: 18px;
+            vertical-align: middle;
+            &-heart {
+                user-select: none;
+                cursor: pointer;
+                border-radius: 7px;
+                padding: 7px;
+                align-self: flex-end;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+                &:hover {
+                    background: $global-green-10;
+                }
             }
-            align-self: flex-end;
-            &:hover {
-                background: $global-green-10;
+            &-picture {
+                user-select: none;
+                margin-top: 15px;
+                height: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                img {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
             }
-        }
-        &-product {
-            cursor: pointer;
-        }
-        &-name {
-            margin-top: 30px;
-            font-size: 14.5px;
-            align-self: flex-start;
-            display: flex;
-            flex: 1 1 auto;
-            cursor: pointer;
-            &:hover {
-                color: $link-hover-color;
+            &-name {
+                cursor: pointer;
+                margin-top: 20px;
+                font-size: 14px;
+                align-self: flex-start;
+                display: flex;
+                flex: 1 1 auto;
+                &:hover {
+                    color: $link-hover-color;
+                    text-decoration: underline;
+                }
             }
-        }
-        &-price {
-            margin-top: 30px;
-            align-self: flex-start;
-            &-initial-price {
-                font-size: 15px;
-                color: $global-black-40;
-                text-decoration: line-through;
-            }
-            &-stock-price {
-                font-size: 25px;
-                color: $global-red;
-            }
-            &-default-price {
-                font-size: 25px;
+            &-price {
+                margin-top: 8px;
+                align-self: flex-start;
+                &-through {
+                    text-decoration: line-through;
+                    color: $global-black-40;
+                    font-size: 14px;
+                }
+                &-stock {
+                    color: $global-red;
+                    font-size: 24px;
+                }
+                &-default {
+                    font-size: 24px;
+                }
             }
         }
     }
