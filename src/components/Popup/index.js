@@ -1,6 +1,5 @@
 import { setPopup } from '../../slices/globalSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import scroll from '../../utils/scroll';
 
 import './Popup.scss';
 
@@ -15,8 +14,6 @@ function Popup({title, name, render}) {
     } else {
         classNames += ' hide';
     }
-
-    scroll(popup);
 
     return (
         <div className={classNames}>

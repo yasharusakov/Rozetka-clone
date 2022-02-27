@@ -1,4 +1,4 @@
-import Slider from '../Slider';
+import MainSlider from '../MainSlider';
 import Products from '../Products';
 
 import './Content.scss';
@@ -7,7 +7,7 @@ function Content() {
     return (
         <div className="content">
             <div className="content__container">
-                <Slider/>
+                <MainSlider/>
                 <Products/>
             </div>
         </div>

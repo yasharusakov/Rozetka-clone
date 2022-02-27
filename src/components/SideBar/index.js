@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import desktop from '../../resources/images/catalog/desktop.png';
 import console from '../../resources/images/catalog/console.png';
 import iphone from '../../resources/images/catalog/iphone.png';
@@ -13,10 +15,10 @@ function SideBar() {
         <div className="sidebar">
             <div className="sidebar__container">
                 <div className="sidebar__catalog">
-                    <a href="" className="sidebar__catalog-item">
+                    <Link to="/c/computers-notebooks" className="sidebar__catalog-item">
                         <img src={desktop} alt="desktop" className="sidebar__catalog-item-icon" />
                         <span className="sidebar__catalog-item-title">Ноутбуки и компьютеры</span>
-                    </a>
+                    </Link>
                     <a href="" className="sidebar__catalog-item">
                         <img src={iphone} alt="iphone" className="sidebar__catalog-item-icon" />
                         <span className="sidebar__catalog-item-title">Смартфоны, ТВ и электроника</span>

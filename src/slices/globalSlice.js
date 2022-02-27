@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import scroll from '../utils/scroll';
+
 const initialState = {
     burgerPanel: false,
     catalog: false,
@@ -14,6 +16,7 @@ const globalSlice = createSlice({
     reducers: {
         setPopup: (state, action) => {
             state[action.payload.name] = action.payload.type;
+            scroll(action.payload.type);
         },
     }
 });

@@ -17,10 +17,14 @@ import 'swiper/css/bundle';
 
 import './Slider.scss';
 
-function Slider() {
+function MainSlider() {
     useEffect(() => {
         new Swiper('.swiper', {
-            loop: true,
+            loop: false,
+            preloadImages: false,
+            lazy: {
+                loadPrevNext: true,
+            },
             autoplay: {
                 delay: 4000,
                 pauseOnMouseEnter: true,
@@ -38,28 +42,36 @@ function Slider() {
         <div className="swiper slider">
             <div className="swiper-wrapper slider-wrapper">
                 <div className="swiper-slide slider-slide">
-                    <img src={collection} alt="collection" />
+                    <img className="swiper-lazy" data-src={collection} alt="collection" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={every} alt="every" />
+                    <img className="swiper-lazy" data-src={every} alt="every" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={galaxy} alt="galaxy" />
+                    <img className="swiper-lazy" data-src={galaxy} alt="galaxy" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={lg} alt="lg" />
+                    <img className="swiper-lazy" data-src={lg} alt="lg" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={mastercard} alt="mastercard" />
+                    <img className="swiper-lazy" data-src={mastercard} alt="mastercard" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={philips} alt="philips" />
+                    <img className="swiper-lazy" data-src={philips} alt="philips" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={privatbank} alt="privatbank" />
+                    <img className="swiper-lazy" data-src={privatbank} alt="privatbank" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
                 <div className="swiper-slide slider-slide">
-                    <img src={slmsung} alt="slmsung" />
+                    <img className="swiper-lazy" data-src={slmsung} alt="slmsung" />
+                    <div className="swiper-lazy-preloader"></div>
                 </div>
             </div>
             <div className="swiper-button-prev slider-button-prev">
@@ -72,4 +84,4 @@ function Slider() {
     )
 }
 
-export default Slider;
+export default MainSlider;

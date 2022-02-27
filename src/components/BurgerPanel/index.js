@@ -5,11 +5,11 @@ import question from '../../resources/images/question.png';
 import basket from '../../resources/images/basket.png';
 import rozetka from '../../resources/svg/rozetka.svg';
 
+import { Link } from 'react-router-dom';
+
 import spoiler from '../../utils/spoiler';
 import GooglePlay from '../../resources/svg/Google-Play.svg';
 import AppStore from '../../resources/svg/App-Store.svg';
-
-import scroll from '../../utils/scroll';
 
 import { setPopup } from '../../slices/globalSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,8 +19,6 @@ import './BurgerPanel.scss';
 function BurgerPanel() {
     const dispatch = useDispatch();
     const burgerPanel = useSelector(state => state.global.burgerPanel);
-
-    scroll(burgerPanel);
 
     let classNames = "burger-panel";
 
@@ -40,7 +38,9 @@ function BurgerPanel() {
                 <div className="burger-panel__content">
                     <section className="burger-panel__top">
                         <div className="burger-panel__top__smth">
-                            <img src={rozetka} alt="rozetka" />
+                            <Link onClick={() => dispatch(setPopup({name: 'burgerPanel', type: false}))} to="/">
+                                <img src={rozetka} alt="rozetka" />
+                            </Link>
                             <div onClick={() => dispatch(setPopup({name: 'burgerPanel', type: false}))} className="burger-panel__top__smth-close">
                                 <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path></svg>
                             </div>

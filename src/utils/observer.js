@@ -3,7 +3,7 @@ function observer() {
         entry.forEach(change => {
             if (change.isIntersecting) {
                 change.target.classList.add('element-show');
-                change.target.querySelector('.element-target img').src = change.target.getAttribute('data-src')
+                change.target.querySelector('.element-target img').src = change.target.getAttribute('data-src');
             }
         });
     }

@@ -6,17 +6,19 @@
         top: 0;
     }
     &__container {
-        main {
+        .main-container {
             margin: 0 auto;
             max-width: #{$container - 60}px;
             padding: 0 30px;
+            @media screen and (max-width: 790px) {
+                padding: 0 10px;
+            }
+        }
+        main {
             display: grid;
             grid-template-columns: 300px calc(100% - 300px);
             @media screen and (max-width: 1024px) {
                 display: block;
-            }
-            @media screen and (max-width: 790px) {
-               padding: 0 10px;
             }
             > div {
                 &:first-child {

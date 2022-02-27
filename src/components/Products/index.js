@@ -3,7 +3,7 @@ import goodstub from '../../resources/svg/goods-stub.svg';
 
 import { useEffect, useState } from 'react';
 
-import { collection, getFirestore, onSnapshot, query, limit, orderBy } from "firebase/firestore";
+import { collection, getFirestore, onSnapshot, query, limit, where } from "firebase/firestore";
 
 import observer from '../../utils/observer';
 import addDotForNumbers from '../../utils/addDotForNumbers';
@@ -16,7 +16,7 @@ function Products() {
     const [products, setProducts] = useState([]);
 
     const requestProducts = () => {
-        const q = query(collection(db, 'products'), orderBy('stockPrice', 'desc'), limit(productLimit));
+        const q = query(collection(db, 'products'), where('categoryType', '==', 'promotionalOffers'), limit(productLimit));
 
         const unsub = onSnapshot(q, (snapshot) => {
             setProducts(snapshot.docs.map(doc => ({...doc.data(), productID: doc.id})));
@@ -48,7 +48,7 @@ function Products() {
                     <img src={heart} alt="heart" />
                 </div>
                 <div className="products__items__item-picture element-target">
-                    <img loading="lazy" src={goodstub} alt={name} />
+                    <img src={goodstub} alt={name} />
                 </div>
                 <a className="products__items__item-name">{name.slice(0, 39)}</a>
                 <div className="products__items__item-price">
