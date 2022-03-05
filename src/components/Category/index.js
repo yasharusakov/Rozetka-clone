@@ -21,9 +21,12 @@ function Category() {
         const q = query(collection(db, 'category', id, 'items'), orderBy('timestamp'));
 
         const unsub = onSnapshot(q, (snapshot) => {
-            if (docSnap.exists()) {
-                setCategory({...docSnap.data(), items: snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))});
-            }
+            setCategory(
+                {
+                    ...docSnap.data(), 
+                    items: snapshot.docs.map(doc => ({...doc.data(), id: doc.id}))
+                }
+            );
         });
 
         return unsub;

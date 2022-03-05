@@ -17,7 +17,7 @@ const globalSlice = createSlice({
         setPopup: (state, action) => {
             state[action.payload.name] = action.payload.type;
             scroll(action.payload.type);
-        },
+        }
     }
 });
 

@@ -23,7 +23,7 @@ function CategoryBigSlider({pictures = []}) {
             speed: 900,
             navigation: {
                 nextEl: '.category-big-slider-next',
-                prevEl: '.category-big-slider-prev',
+                prevEl: '.category-big-slider-prev'
             }
         });
     }, []);

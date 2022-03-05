@@ -4,6 +4,7 @@ import Header from '../Header';
 import SideBar from '../SideBar';
 import Content from '../Content';
 import Category from '../Category';
+import ProductsCategory from '../ProductsCategory';
 import Footer from '../Footer';
 
 import '../../styles/style.scss';
@@ -26,6 +27,22 @@ function App() {
                             <>
                                 <div className="main-container">
                                     <Category/>
+                                </div>
+                                <Footer/>
+                            </>
+                        }/>
+                        <Route path="/p/:productsID" element={
+                            <>
+                                <div className="main-container">
+                                    <ProductsCategory/>
+                                </div>
+                                <Footer/>
+                            </>
+                        }/>
+                        <Route path="/p/:productsID/:filters" element={
+                            <>
+                                <div className="main-container">
+                                    <ProductsCategory filters={true}/>
                                 </div>
                                 <Footer/>
                             </>

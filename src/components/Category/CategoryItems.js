@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { useEffect } from 'react';
 
 import goodstub from '../../resources/svg/goods-stub.svg';
@@ -11,12 +13,15 @@ function CategoryItems({items = []}) {
     }, [items])
 
     const elements = items.map(item => {
+        const path = `/p/${item.link}`;
         return (
             <div data-src={item.url} key={item.id} className="category__item element-animation">
                 <div className="element-target">
-                    <img src={goodstub} alt={item.title} />
+                    <Link to={path}>
+                        <img src={goodstub} alt={item.title} />
+                    </Link>
                 </div>
-                <a href="" className="category__item-title">{item.title}</a>
+                <Link to={path} className="category__item-title">{item.title}</Link>
             </div>
         )
     })

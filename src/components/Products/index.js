@@ -10,13 +10,30 @@ import addDotForNumbers from '../../utils/addDotForNumbers';
 
 import './Products.scss';
 
-function Products() {
+function Products({header, filterName, symbol, filterType, limitProducts, filtersData}) {
     const db = getFirestore();
-    const [productLimit, setProductLimit] = useState(5);
+    const [productLimit, setProductLimit] = useState(limitProducts);
     const [products, setProducts] = useState([]);
 
     const requestProducts = () => {
-        const q = query(collection(db, 'products'), where('categoryType', '==', 'promotionalOffers'), limit(productLimit));
+        
+        let q;
+
+        if (productLimit) {
+            q = query(collection(db, 'products'), where(filterName, symbol, filterType), limit(productLimit));
+        } else {
+            q = query(collection(db, 'products'), where(filterName, symbol, filterType));
+        }
+
+        if (filtersData) {
+            if (filtersData.brend && filtersData.price) {
+                q = query(collection(db, 'products'), where(filterName, symbol, filterType), where('price', '>=', +filtersData.price[0]), where('brend', 'in', filtersData.brend));
+            } else if (filtersData.brend) {
+                q = query(collection(db, 'products'), where(filterName, symbol, filterType), where('brend', 'in', filtersData.brend));
+            } else if (filtersData.price) {
+                q = query(collection(db, 'products'), where(filterName, symbol, filterType), where('price', '>=', +filtersData.price[0]));
+            }
+        }
 
         const unsub = onSnapshot(q, (snapshot) => {
             setProducts(snapshot.docs.map(doc => ({...doc.data(), productID: doc.id})));
@@ -28,10 +45,8 @@ function Products() {
     }
 
     useEffect(() => {
-        const unsub = requestProducts();
-
-        return unsub;
-    }, []);
+        requestProducts();
+    }, [filtersData]);
 
     useEffect(() => {
         observer();
@@ -53,7 +68,7 @@ function Products() {
                 <a className="products__items__item-name">{name.slice(0, 39)}</a>
                 <div className="products__items__item-price">
                     {
-                        stockPrice !== '' ? (
+                        stockPrice !== false ? (
                             <>
                                 <div className="products__items__item-price-through">{price2} ₴</div>
                                 <div className="products__items__item-price-stock">{stockPrice2} ₴</div>
@@ -69,11 +84,13 @@ function Products() {
     return (
         <div className="products">
             <div className="products__container">
-                <div className="products__category-name">Акционные предложения</div>
-                <div className="products__items">
+                {header ? <div className="products__category-name">{header}</div> : null}
+                <div style={{marginTop: header ? '25px' : '0'}} className="products__items">
                     {elements}
                 </div>
-                <button style={{display: productLimit === 15 ? 'none' : ''}} onClick={requestProducts} className="products__show-more">Показать еще</button>
+                {
+                    limitProducts ? <button style={{display: productLimit === 15 ? 'none' : ''}} onClick={requestProducts} className="products__show-more">Показать еще</button> : null
+                }
             </div>
         </div>
     )
