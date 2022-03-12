@@ -1,70 +1,37 @@
-import { useEffect, useState, Fragment } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import Checkbox from './Checkbox';
-import Price from './Price';
 
-function ProductsCategorySideBar({productsID}) {
-    const navigate = useNavigate();
-    const [brend, setBrend] = useState([]);
-    const [price, setPrice] = useState(0);
+import { useSelector, useDispatch } from 'react-redux';
+import { setPopup } from '../../slices/globalSlice';
 
-    const items = [
-        {
-            filterName: 'brend',
-            filterType: 'apple',
-            id: 123123132141
-        },
-        {
-            filterName: 'brend',
-            filterType: 'hp',
-            id: 123123123123
-        },
-        {
-            filterName: 'price',
-            id: 123124141213131
-        }
-    ]
+function ProductsCategorySideBar({filters}) {
+    const dispatch = useDispatch();
+    const filter = useSelector(state => state.global.filter);
+    const brendElements = filters.brend.map((item, i) => <Checkbox key={i} brendName={item} />)
 
-    useEffect(() => {
-        let array = []
+    let classNames = 'products-category__sidebar';
 
-        if (brend.length !== 0) array.push('brend=' + brend.join(','));
-        if (price !== 0) array.push('price=' + price);
-
-        const url = array.length !== 0 ? `/${array.join(';')}` : '';
-
-        const path = `/p/${productsID}${url}`;
-
-        navigate(path);
-
-    }, [brend, price])
-
-    const elements = items.map(item => {
-        return (
-            <Fragment key={item.id}>
-                {
-                    item.filterName === 'brend' ? 
-                    <Checkbox 
-                        {...item} 
-                        brend={brend} 
-                        setBrend={setBrend} 
-                    /> : null
-                }
-                {
-                    item.filterName === 'price' ?
-                    <Price
-                        setPrice={setPrice}
-                    /> : null
-                }
-            </Fragment>
-        )
-    })
+    if (filter) {
+        classNames += ' products-category__sidebar-show';
+    } else {
+        classNames+= ' products-category__sidebar-hide';
+    }
 
     return (
-        <div className="products-category__sidebar">
-            <div className="products-category__sidebar__items">
-                {elements}
+        <div onClick={(e) => {
+            if (e.target.classList.contains('products-category__sidebar')) {
+                dispatch(setPopup({name: 'filter', type: false}))
+            }
+        }} className={classNames}>
+            <div className="products-category__sidebar__container">
+                <div onClick={() => dispatch(setPopup({name: 'filter', type: false}))} className="products-category__sidebar-close">
+                    <svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M18.4 4L12 10.4L5.6 4L4 5.6L10.4 12L4 18.4L5.6 20L12 13.6L18.4 20L20 18.4L13.6 12L20 5.6L18.4 4Z"></path></svg>
+                </div>
+                <div className="products-category__sidebar__content">
+                    <div className="products-category__sidebar__items">
+                        <div className="products-category__sidebar__item-title">Бренды</div>
+                        {brendElements}
+                    </div>
+                </div>
             </div>
         </div>
     )

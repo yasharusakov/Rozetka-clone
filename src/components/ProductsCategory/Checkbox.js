@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 
-function Checkbox({filterType, filterName, setBrend, brend}) {
+import { useDispatch } from 'react-redux';
+
+import { setBrend, removeBrend } from '../../slices/filterSlice'
+
+import checkmark from '../../resources/svg/check-mark.svg';
+
+function Checkbox({brendName}) {
+    const dispatch = useDispatch();
     const [checked, setChecked] = useState(false);
 
     let classNames = 'checkbox ';
@@ -17,20 +24,18 @@ function Checkbox({filterType, filterName, setBrend, brend}) {
 
     useEffect(() => {
         if (checked) {
-            const array = brend.slice();
-            array.push(filterType);
-            setBrend(array);
+            dispatch(setBrend(brendName));
         } else {
-            const array = brend.slice();
-            const filtered = array.filter(item => item !== filterType);
-            setBrend(filtered);
+            dispatch(removeBrend(brendName));
         }
-    }, [checked])
+    }, [checked]);
 
     return (
         <div className={classNames} onClick={onCheck}>
-            <h1>{filterType}</h1>
-            <h1>{filterName}</h1>
+            <div className="checkbox__box">
+                <img src={checkmark} alt="checkmark" />
+            </div>
+            <div className="checkbox__name">{brendName}</div>
         </div>
     )
 }

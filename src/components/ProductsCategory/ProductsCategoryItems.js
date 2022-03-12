@@ -1,15 +1,15 @@
 import Products from '../Products';
 
-function ProductsCategoryItems({productsID, filtersData}) {
+function ProductsCategoryItems({productsID}) {
     return (
         <div className="products-category__items">
             <Products 
-                    filterName="type" 
-                    symbol="array-contains" 
-                    filterType={productsID} 
-                    limitProducts={false}
-                    filtersData={filtersData}
-                />
+                filterName="type" 
+                symbol="array-contains" 
+                filterType={productsID} 
+                limitProducts={false}
+                useSetItems={true}
+            />
         </div>
     )
 }

@@ -5,12 +5,19 @@ import { useEffect, useState } from 'react';
 
 import { collection, getFirestore, onSnapshot, query, limit, where } from "firebase/firestore";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { setItems } from '../../slices/itemsSlice';
+
+import { filterByBrends, filterBySort } from '../../slices/filterSlice';
+
 import observer from '../../utils/observer';
 import addDotForNumbers from '../../utils/addDotForNumbers';
 
 import './Products.scss';
 
-function Products({header, filterName, symbol, filterType, limitProducts, filtersData}) {
+function Products({header, filterName, symbol, filterType, limitProducts, useSetItems}) {
+    const dispatch = useDispatch();
+    const filter = useSelector(state => state.filter);
     const db = getFirestore();
     const [productLimit, setProductLimit] = useState(limitProducts);
     const [products, setProducts] = useState([]);
@@ -19,40 +26,34 @@ function Products({header, filterName, symbol, filterType, limitProducts, filter
         
         let q;
 
-        if (productLimit) {
-            q = query(collection(db, 'products'), where(filterName, symbol, filterType), limit(productLimit));
-        } else {
-            q = query(collection(db, 'products'), where(filterName, symbol, filterType));
-        }
-
-        if (filtersData) {
-            if (filtersData.brend && filtersData.price) {
-                q = query(collection(db, 'products'), where(filterName, symbol, filterType), where('price', '>=', +filtersData.price[0]), where('brend', 'in', filtersData.brend));
-            } else if (filtersData.brend) {
-                q = query(collection(db, 'products'), where(filterName, symbol, filterType), where('brend', 'in', filtersData.brend));
-            } else if (filtersData.price) {
-                q = query(collection(db, 'products'), where(filterName, symbol, filterType), where('price', '>=', +filtersData.price[0]));
-            }
-        }
+        if (productLimit) q = query(collection(db, 'products'), where(filterName, symbol, filterType), limit(productLimit));
+        else q = query(collection(db, 'products'), where(filterName, symbol, filterType));
 
         const unsub = onSnapshot(q, (snapshot) => {
-            setProducts(snapshot.docs.map(doc => ({...doc.data(), productID: doc.id})));
+            const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}));
+            setProducts(items);
+            if (useSetItems) dispatch(setItems(items))
         });
 
-        setProductLimit(productLimit => productLimit + 5);
+
+        if (productLimit) setProductLimit(productLimit => productLimit + 5);
 
         return unsub;
     }
 
     useEffect(() => {
         requestProducts();
-    }, [filtersData]);
+    }, [])
 
     useEffect(() => {
         observer();
-    }, [products]);
+    }, [products, filter]);
 
-    const elements = products.map(({productID, name, url, price, stockPrice}) => {
+    const items = [...products]
+    const brends = filterByBrends(items, filter);
+    const sortBy = filterBySort(brends, filter);
+
+    const elements = sortBy.map(({productID, name, url, price, stockPrice}) => {
 
         const price2 = addDotForNumbers(price),
               stockPrice2 = addDotForNumbers(stockPrice);

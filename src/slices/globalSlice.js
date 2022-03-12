@@ -7,7 +7,8 @@ const initialState = {
     catalog: false,
     basket: false,
     login: false,
-    register: false
+    register: false,
+    filter: false
 }
 
 const globalSlice = createSlice({

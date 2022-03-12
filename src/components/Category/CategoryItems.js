@@ -6,14 +6,14 @@ import goodstub from '../../resources/svg/goods-stub.svg';
 
 import observer from '../../utils/observer';
 
-function CategoryItems({items = []}) {
+function CategoryItems({categoryID, items = []}) {
 
     useEffect(() => {
         observer();
     }, [items])
 
     const elements = items.map(item => {
-        const path = `/p/${item.link}`;
+        const path = `/c/${categoryID}/${item.link}`;
         return (
             <div data-src={item.url} key={item.id} className="category__item element-animation">
                 <div className="element-target">

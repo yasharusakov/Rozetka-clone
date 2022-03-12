@@ -23,7 +23,7 @@ function App() {
                                 <Content/>
                             </main>
                         }/>
-                        <Route path="/c/:id" element={
+                        <Route path="/c/:categoryID" element={
                             <>
                                 <div className="main-container">
                                     <Category/>
@@ -31,18 +31,10 @@ function App() {
                                 <Footer/>
                             </>
                         }/>
-                        <Route path="/p/:productsID" element={
+                        <Route path="/c/:categoryID/:productsID" element={
                             <>
                                 <div className="main-container">
                                     <ProductsCategory/>
-                                </div>
-                                <Footer/>
-                            </>
-                        }/>
-                        <Route path="/p/:productsID/:filters" element={
-                            <>
-                                <div className="main-container">
-                                    <ProductsCategory filters={true}/>
                                 </div>
                                 <Footer/>
                             </>

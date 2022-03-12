@@ -8,7 +8,13 @@ function Content() {
         <div className="content">
             <div className="content__container">
                 <MainSlider/>
-                <Products header="Акционные предложения" filterName="categoryType" symbol="==" filterType="promotionalOffers" limitProducts={5}/>
+                <Products 
+                    header="Акционные предложения" 
+                    filterName="categoryType" 
+                    symbol="==" 
+                    filterType="promotionalOffers" 
+                    limitProducts={5}
+                />
             </div>
         </div>
     )
