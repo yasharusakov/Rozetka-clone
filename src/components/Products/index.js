@@ -3,6 +3,8 @@ import goodstub from '../../resources/svg/goods-stub.svg';
 
 import { useEffect, useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { collection, getFirestore, onSnapshot, query, limit, where } from "firebase/firestore";
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,17 +58,18 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
     const elements = sortBy.map(({productID, name, url, price, stockPrice}) => {
 
         const price2 = addDotForNumbers(price),
-              stockPrice2 = addDotForNumbers(stockPrice);
+              stockPrice2 = addDotForNumbers(stockPrice),
+              path = `/p/${productID}`;
 
         return (
             <div key={productID} data-src={url} className="products__items__item element-animation">
                 <div className="products__items__item-heart">
                     <img src={heart} alt="heart" />
                 </div>
-                <div className="products__items__item-picture element-target">
+                <Link to={path} className="products__items__item-picture element-target">
                     <img src={goodstub} alt={name} />
-                </div>
-                <a className="products__items__item-name">{name.slice(0, 39)}</a>
+                </Link>
+                <Link to={path} className="products__items__item-name">{name.slice(0, 39)}</Link>
                 <div className="products__items__item-price">
                     {
                         stockPrice !== false ? (

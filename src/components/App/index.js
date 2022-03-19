@@ -5,6 +5,7 @@ import SideBar from '../SideBar';
 import Content from '../Content';
 import Category from '../Category';
 import ProductsCategory from '../ProductsCategory';
+import Product from '../Product';
 import Footer from '../Footer';
 
 import '../../styles/style.scss';
@@ -36,6 +37,12 @@ function App() {
                                 <div className="main-container">
                                     <ProductsCategory/>
                                 </div>
+                                <Footer/>
+                            </>
+                        }/>
+                        <Route path="p/:productID" element={
+                            <>
+                                <Product/>
                                 <Footer/>
                             </>
                         }/>
