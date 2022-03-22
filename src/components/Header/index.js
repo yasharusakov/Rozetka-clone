@@ -13,15 +13,16 @@ import Login from '../Login';
 import Register from '../Register';
 import Basket from '../Basket';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setPopup } from '../../slices/globalSlice';
 
 import './Header.scss';
 
 function Header() {
-    
+
     const dispatch = useDispatch();
+    const inCart = useSelector(state => state.inCart.inCart);
 
     return (
         <header className="header wrapper__header">
@@ -49,6 +50,7 @@ function Header() {
                 </div>
                 <div onClick={() => dispatch(setPopup({name: 'basket', type: true}))} className="header__shopping-basket">
                     <img src={basket} alt="basket" />
+                    <div className="header__shopping-basket__counter">{inCart.length}</div>
                 </div>
             </div>
             <BurgerPanel/>

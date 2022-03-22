@@ -15,7 +15,7 @@ function ProductsCategory() {
     const {categoryID, productsID} = useParams();
 
     const dispatch = useDispatch();
-
+    
     const items = useSelector(state => state.items.items);
     const [filters, setFilters] = useState({brend: [], price: {min: 0, max: 0}});
 

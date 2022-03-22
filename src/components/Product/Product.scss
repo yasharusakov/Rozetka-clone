@@ -16,6 +16,7 @@
         top: 70px;
         z-index: 9;
         overflow-x: auto;
+        overflow-y: hidden;
 
         &__container {
             display: flex;
@@ -143,6 +144,16 @@
                 }
             }
 
+            &-inCart {
+                color: $link-color;
+                cursor: pointer;
+                transition: 0.3s ease;
+                border-bottom: 1px dotted;
+                &:hover {
+                    color: $link-hover-color;
+                }
+            }
+
             &-heart {
                 user-select: none;
                 cursor: pointer;
@@ -217,6 +228,8 @@
             }
 
             &-price {
+                display: flex;
+                align-items: center;
                 &-default {
                     @include adaptiv-font(35, 24);
 

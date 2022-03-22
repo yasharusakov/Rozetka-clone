@@ -8,10 +8,20 @@ import ProductsCategory from '../ProductsCategory';
 import Product from '../Product';
 import Footer from '../Footer';
 
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setAllToCart } from '../../slices/inCartSlice';
+
 import '../../styles/style.scss';
 import './App.scss';
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setAllToCart())
+    }, [])
+
     return (
         <BrowserRouter>
             <div className="wrapper">

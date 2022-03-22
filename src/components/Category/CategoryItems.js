@@ -12,10 +12,10 @@ function CategoryItems({categoryID, items = []}) {
         observer();
     }, [items])
 
-    const elements = items.map(item => {
+    const elements = items.map((item, index) => {
         const path = `/c/${categoryID}/${item.link}`;
         return (
-            <div data-src={item.url} key={item.id} className="category__item element-animation">
+            <div data-src={item.url} key={index} className="category__item element-animation">
                 <div className="element-target">
                     <Link to={path}>
                         <img src={goodstub} alt={item.title} />

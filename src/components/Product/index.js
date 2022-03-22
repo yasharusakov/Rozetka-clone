@@ -8,12 +8,19 @@ import heart from '../../resources/svg/heart.svg';
 
 import addDotForNumbers from '../../utils/addDotForNumbers';
 
+import { addToCart } from '../../slices/inCartSlice';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { setPopup } from '../../slices/globalSlice';
+
 import './Product.scss';
 
 function Product() {
     const db = getFirestore();
+    const dispatch = useDispatch();
     const {productID} = useParams();
     const [product, setProduct] = useState({});
+    const inCart = useSelector(state => state.inCart.inCart);
 
     const requestProduct = async () => {
         const docRef = doc(db, 'products', productID);
@@ -58,6 +65,8 @@ function Product() {
     const price2 = addDotForNumbers(product.price),
           stockPrice2 = addDotForNumbers(product.stockPrice);
 
+    const hasItInCart = inCart.some(item => item === productID);
+
     return (
         <div className="product">
             <div className="product__name main-container">{product.name}</div>
@@ -83,15 +92,28 @@ function Product() {
                     <div className="product__item_2__element">
                         <div className="product__item_2__element-price">
                             {
-                                product.stockPrice !== false ? <div className="product__item_2__element-price-default product__item_2__element-price-default-line-through">{price2} ₴</div> : null
-                            }
-                            {
                                 product.stockPrice !== false ? 
-                                    <div className="product__item_2__element-price-stockPrice">{stockPrice2} ₴</div> :
+                                    (
+                                        <>
+                                            <div className="product__item_2__element-price-default product__item_2__element-price-default-line-through">{price2} ₴</div>
+                                            <div className="product__item_2__element-price-stockPrice">{stockPrice2} ₴</div>
+                                        </>
+                                    ) :
                                     <div className="product__item_2__element-price-default">{price2} ₴</div>
                             }
                         </div>
-                        <div className="product__item_2__element-buy">Купить</div>
+                        {
+                            hasItInCart ? 
+                                <div 
+                                    onClick={() => dispatch(setPopup({name: 'basket', type: true}))} 
+                                    className="product__item_2__element-inCart">В корзине
+                                </div> 
+                                : 
+                                <div
+                                    onClick={() => dispatch(addToCart(productID))}
+                                    className="product__item_2__element-buy">Купить
+                                </div>
+                        }
                         <div className="product__item_2__element-heart">
                             <img src={heart} alt="heart" />
                         </div>

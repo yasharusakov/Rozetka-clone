@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { collection, getFirestore, onSnapshot, query, limit, where } from "firebase/firestore";
+import { collection, getFirestore, onSnapshot, query, where } from "firebase/firestore";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setItems } from '../../slices/itemsSlice';
@@ -21,24 +21,18 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
     const dispatch = useDispatch();
     const filter = useSelector(state => state.filter);
     const db = getFirestore();
-    const [productLimit, setProductLimit] = useState(limitProducts);
     const [products, setProducts] = useState([]);
+    const [productsLimit, setProductsLimit] = useState(5);
 
     const requestProducts = () => {
         
-        let q;
-
-        if (productLimit) q = query(collection(db, 'products'), where(filterName, symbol, filterType), limit(productLimit));
-        else q = query(collection(db, 'products'), where(filterName, symbol, filterType));
+        const q = query(collection(db, 'products'), where(filterName, symbol, filterType));
 
         const unsub = onSnapshot(q, (snapshot) => {
             const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}));
             setProducts(items);
             if (useSetItems) dispatch(setItems(items))
         });
-
-
-        if (productLimit) setProductLimit(productLimit => productLimit + 5);
 
         return unsub;
     }
@@ -49,9 +43,22 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
 
     useEffect(() => {
         observer();
-    }, [products, filter]);
+    }, [products, filter, productsLimit]);
 
-    const items = [...products]
+    let items = [];
+
+    if (limitProducts) {
+        if (products.length > 0) {
+            const elements = [];
+            for (let i = 0; i < productsLimit; i++) {
+                elements.push(products[i]);
+            }
+            items = [...elements];
+        }
+    } else {
+        items = [...products];
+    }
+
     const brends = filterByBrends(items, filter);
     const sortBy = filterBySort(brends, filter);
 
@@ -93,7 +100,7 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
                     {elements}
                 </div>
                 {
-                    limitProducts ? <button style={{display: productLimit === 15 ? 'none' : ''}} onClick={requestProducts} className="products__show-more">Показать еще</button> : null
+                    limitProducts ? <button style={{display: productsLimit === products.length ? 'none' : ''}} onClick={() => setProductsLimit((productsLimit) => productsLimit + 5)} className="products__show-more">Показать еще</button> : null
                 }
             </div>
         </div>

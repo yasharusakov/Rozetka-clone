@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     choosedBrends: [],
-    sortBy: 'from-expensive-to-cheap'
+    sortBy: ''
 };
 
 const filterSlice = createSlice({
