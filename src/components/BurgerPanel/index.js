@@ -19,6 +19,7 @@ import './BurgerPanel.scss';
 function BurgerPanel() {
     const dispatch = useDispatch();
     const burgerPanel = useSelector(state => state.global.burgerPanel);
+    const inCartLength = useSelector(state => state.inCart.inCart.length);
 
     let classNames = "burger-panel";
 
@@ -84,6 +85,13 @@ function BurgerPanel() {
                                 <img src={basket} alt="basket" />
                             </div>
                             <h1>Корзина</h1>
+                            {
+                                inCartLength ? (
+                                    <div className="burger-panel__inCart">
+                                        <div className="burger-panel__inCartLength">{inCartLength}</div>
+                                    </div>
+                                ) : null
+                            }
                         </div>
                         <div className="burger-panel__actions-action">
                             <div>

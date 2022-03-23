@@ -1,9 +1,6 @@
-@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
 
 .basket {
-    &__container {
-
-    }
     &__nothing {
         display: flex;
         justify-content: center;
@@ -17,6 +14,125 @@
             margin-top: 20px;
             font-size: 14px;
             color: $global-black-40;
+        }
+    }
+    &__elements {
+        .line {
+            width: 100%;
+            height: 1px;
+            background: $global-black-10;
+            margin: 20px 0;
+            &:last-child {
+                display: none;
+            }
+        }
+    }
+
+    &__remove-all {
+        text-align: right;
+        margin-bottom: 20px;
+        span {
+            cursor: pointer;
+            color: $link-color;
+            &:hover {
+                color: $link-hover-color;
+            }
+        }
+    }
+
+    &__element {
+        display: flex;
+        &__picture {
+            min-width: 125px;
+            min-height: 125px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                max-width: 125px;
+                max-height: 125px;
+            }
+            margin-right: 15px;
+        }
+        &__name {
+            font-size: 14px;
+            margin: 0 10px;
+            flex: 1 1 100%;
+        }
+        button {
+            cursor: pointer;
+            background: none;
+            color: $link-color;
+            transition: 0.3s ease;
+            &:hover {
+                color: $link-hover-color;
+            }
+        }
+    }
+
+    &__general-price {
+        position: sticky;
+        left: 0;
+        bottom: -16px;
+        width: 100%;
+        height: 150px;
+        background: $white;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        @media screen and (max-width: 769px){
+            justify-content: none;
+        }
+        .price {
+            width: 330px;
+            height: 100px;
+            border-radius: 3px;
+            background: rgba(0,160,70,.1);
+            padding: 20px;
+            border: 1px solid $global-green;
+            display: flex;
+            align-items: center;
+            @media screen and (max-width: 769px){
+                width: 100%;
+                flex-direction: column;
+                justify-content: center;
+            }
+            &__total-price {
+                color: $global-black;
+                div {
+                    &:first-child {
+                        display: none;
+                    }
+                    @include adaptiv-font(40, 20);
+                }
+                margin-right: 20px;
+                @media screen and (max-width: 769px){
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-right: 0;
+                    margin-bottom: 5px;
+                    div {
+                        &:first-child {
+                            display: block;
+                        }
+                    }
+                }
+            }
+            &__button {
+                color: $white;
+                background: $global-green;
+                width: 100%;
+                height: 48px;
+                padding: 5px;
+                border-radius: 3px;
+                transition: 0.3s ease;
+                cursor: pointer;
+                &:hover {
+                    background: #02cc5a;
+                }
+            }
         }
     }
 }

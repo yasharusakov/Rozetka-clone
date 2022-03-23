@@ -19,6 +19,14 @@ const inCartSlice = createSlice({
         addToCart(state, action) {
             state.inCart.unshift(action.payload);
             cookies.addProduct(action.payload);
+        },
+        removeAllProducts(state) {
+            state.inCart = [];
+            cookies.removeAllProducts();
+        },
+        removeProduct(state, action) {
+            state.inCart = state.inCart.filter(item => item !== action.payload);
+            cookies.removeProduct(action.payload);
         }
     }
 });
@@ -27,5 +35,7 @@ export default inCartSlice.reducer;
 
 export const {
     setAllToCart,
-    addToCart
+    addToCart,
+    removeAllProducts,
+    removeProduct
 } = inCartSlice.actions

@@ -19,6 +19,19 @@ class Cookies {
         const main = value + condition;
         this.setItem('products', [...new Set(main.split(','))])
     }
+
+    removeAllProducts() {
+        this.setItem('products', '')
+    }
+
+    removeProduct(value) {
+        const data = this.getItem('products');
+        const products = data.split(',');
+        const filtered = products.filter(item => item !== value);
+        const back = filtered.join(',');
+        this.setItem('products', back);
+        console.log(back);
+    }
 }
 
 export default Cookies;

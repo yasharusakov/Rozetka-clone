@@ -50,7 +50,9 @@ function Header() {
                 </div>
                 <div onClick={() => dispatch(setPopup({name: 'basket', type: true}))} className="header__shopping-basket">
                     <img src={basket} alt="basket" />
-                    <div className="header__shopping-basket__counter">{inCart.length}</div>
+                    {
+                        inCart.length ? <div className="header__shopping-basket__counter">{inCart.length}</div> : null
+                    }
                 </div>
             </div>
             <BurgerPanel/>
