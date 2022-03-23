@@ -35,6 +35,28 @@ function Basket() {
         observer();
     }, [products])
 
+    const Button = ({value}) => {
+        const [popupDelete, setPopupDelete] = useState(false);
+
+        function setDelete() {
+            setPopupDelete(false)
+        }
+
+        useEffect(() => {
+            document.addEventListener('mouseup', setDelete);
+            return () => {
+                document.removeEventListener('mouseup', setDelete)
+            }
+        }, []);
+
+        return (
+            <div onClick={() => setPopupDelete(true)} className={popupDelete ? 'basket__element__points active': 'basket__element__points'}>
+                <span></span><span></span><span></span>
+                <button onClick={() => dispatch(removeProduct(value))}>Удалить</button>
+            </div>
+        )
+    }
+
     const elements = useMemo(() => {
         return products.map(item => {
             return (
@@ -44,7 +66,7 @@ function Basket() {
                             <img src={goodstub} alt={item.url} />
                         </div>
                         <div className="basket__element__name">{item.name} <strong>/</strong> {item.characteristic}</div>
-                        <button onClick={() => dispatch(removeProduct(item.productID))}>Удалить</button>
+                        <Button value={item.productID} />
                     </div>
                     <div className="line"></div>
                 </Fragment>
@@ -68,15 +90,17 @@ function Basket() {
                         </div>
                     ) : (
                         <div className="basket__have-elements">
-                            <div onClick={() => dispatch(removeAllProducts())} className="basket__remove-all"><span>Удалить все</span></div>
-                            <div className="basket__elements">
-                                {elements}
+                            <div>
+                                <div onClick={() => dispatch(removeAllProducts())} className="basket__remove-all"><span>Удалить все</span></div>
+                                <div className="basket__elements">
+                                    {elements}
+                                </div>
                             </div>
                             <div className="basket__general-price">
                                 <div className="price">
                                     <div className="price__total-price">
                                         <div>Итого</div>
-                                        <div>{generalPrice}</div>
+                                        <div>{generalPrice} ₴</div>
                                     </div>
                                     <button className="price__button">Оформить заказ</button>
                                 </div>

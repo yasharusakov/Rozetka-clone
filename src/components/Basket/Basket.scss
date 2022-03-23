@@ -27,7 +27,6 @@
             }
         }
     }
-
     &__remove-all {
         text-align: right;
         margin-bottom: 20px;
@@ -59,13 +58,54 @@
             margin: 0 10px;
             flex: 1 1 100%;
         }
-        button {
+        &__points {
             cursor: pointer;
-            background: none;
-            color: $link-color;
-            transition: 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 25px;
+            height: 25px;
+            span {
+                width: 6px;
+                height: 6px;
+                background: $link-color;
+                border-radius: 50%;
+                &:nth-child(2) {
+                    margin: 2px 0;
+                }
+            }
             &:hover {
-                color: $link-hover-color;
+                span {
+                    background: $link-hover-color;
+                }
+            }
+            button {
+                text-align: center;
+                visibility: hidden;
+                width: 150px;
+                height: 60px;
+                padding: 20px;
+                position: absolute;
+                padding: 20px;
+                right: -100%;
+                opacity: 0;
+                transform: scale(0.9);
+                background: $white;
+                border-radius: 4px;
+                box-shadow: 0 2px 4px rgb(0 0 0 / 25%);
+                cursor: pointer;
+                color: $link-color;
+                transition: 0.3s ease;
+                &:hover {
+                    color: $link-hover-color;
+                }
+            }
+            &.active {
+                button {
+                    visibility: visible;
+                    opacity: 1;
+                    transform: scale(1);
+                }
             }
         }
     }
@@ -79,7 +119,7 @@
         background: $white;
         display: flex;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end;
         @media screen and (max-width: 769px){
             justify-content: none;
         }
