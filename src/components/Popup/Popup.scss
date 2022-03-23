@@ -65,6 +65,7 @@
         padding: 15px 30px;
         overflow-y: auto;
         height: calc(100% - 60px);
+        overflow-x: hidden;
     }
     &.show {
         opacity: 1;
