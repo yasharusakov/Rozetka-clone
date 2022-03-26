@@ -41,6 +41,7 @@
 
     &__element {
         display: flex;
+        align-items: center;
         &__picture {
             min-width: 125px;
             min-height: 125px;
@@ -120,6 +121,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
+        padding-bottom: 16px;
         @media screen and (max-width: 769px){
             justify-content: none;
         }
@@ -143,6 +145,7 @@
                     &:first-child {
                         display: none;
                     }
+                    white-space: nowrap;
                     @include adaptiv-font(40, 20);
                 }
                 margin-right: 20px;
@@ -173,6 +176,46 @@
                     background: #02cc5a;
                 }
             }
+        }
+    }
+    &__additional {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 10px;
+        @media screen and (max-width: 730px) {
+            justify-content: space-between;
+        }
+        &__counter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input {
+                width: 50px;
+                height: 40px;
+                text-align: center;
+                border: 1px solid $global-black-10;
+                border-radius: 5px;
+                margin: 0 10px;
+                &:focus {
+                    outline: 3px solid $global-light-blue;
+                }
+            }
+            button {
+                font-weight: normal;
+                cursor: pointer;
+                background: none;
+                font-size: 45px;
+                color: $global-black-10;
+                &:disabled {
+                    &:first-child {
+                        color: $global-red;
+                    }
+                }
+            }
+        }
+        &__price {
+            font-size: 20px;
         }
     }
 }

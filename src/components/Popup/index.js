@@ -22,7 +22,7 @@ function Popup({title, name, render}) {
                     dispatch(setPopup({name: name, type: false}));
                 }
             }} className="popup__container">
-                <div className="popup__content">
+                <div className={name === 'login' || name === 'register' ? 'popup__content login-and-register': 'popup__content default'}>
                     <div className="popup__control-panel">
                         <div className="popup__control-panel__title">{title}</div>
                         <div onClick={() => dispatch(setPopup({name: name, type: false}))} className="popup__control-panel__close">&#x2715;</div>

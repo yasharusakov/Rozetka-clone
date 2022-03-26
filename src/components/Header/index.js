@@ -13,14 +13,18 @@ import Login from '../Login';
 import Register from '../Register';
 import Basket from '../Basket';
 
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setPopup } from '../../slices/globalSlice';
 
+import useAuthState from '../../hooks/useAuthState';
+
 import './Header.scss';
 
 function Header() {
-
+    const [userState, loading, auth] = useAuthState();
+    const [searchValue, setSearchValue] = useState('');
     const dispatch = useDispatch();
     const inCart = useSelector(state => state.inCart.inCart);
 
@@ -42,13 +46,17 @@ function Header() {
                 </button>
                 <form className="header__search-form">
                     <img src={search} alt="search" />
-                    <input placeholder="Я ищу..." type="text" />
+                    <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Я ищу..." type="text" />
                     <button type="submit" className="header__search-form__submit">Найти</button>
                 </form>
-                <div onClick={() => dispatch(setPopup({name: 'user', type: true}))} className="header__user">
-                    <img src={user} alt="user" />
-                </div>
-                <div onClick={() => dispatch(setPopup({name: 'basket', type: true}))} className="header__shopping-basket">
+                {
+                    userState ? null : (
+                        <div onClick={() => dispatch(setPopup({name: 'login', type: true}))} className="header__user">
+                            <img src={user} alt="user" />
+                        </div>
+                    )
+                }
+                <div style={userState ? {marginLeft: 0} : {}} onClick={() => dispatch(setPopup({name: 'basket', type: true}))} className="header__shopping-basket">
                     <img src={basket} alt="basket" />
                     {
                         inCart.length ? <div className="header__shopping-basket__counter">{inCart.length}</div> : null
@@ -57,7 +65,7 @@ function Header() {
             </div>
             <BurgerPanel/>
             <Popup title="Каталог товаров" name="catalog" render={() => <Catalog/>}/>
-            <Popup title="Вход" name="user" render={() => <Login/>}/>
+            <Popup title="Вход" name="login" render={() => <Login/>}/>
             <Popup title="Регистрация" name="register" render={() => <Register/>} />
             <Popup title="Корзина" name="basket" render={() => <Basket/>}/>
         </header>

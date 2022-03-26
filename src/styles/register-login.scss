@@ -1,0 +1,78 @@
+.register-login {
+    &__form {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        span {
+            font-size: 13px;
+            margin: 10px 0;
+            color: $global-black-20;
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+        input {
+            width: 100%;
+            height: 48px;
+            border: 1px solid $global-black-20;
+            border-radius: 4px;
+            transition: 0.3s ease;
+            padding: 10px;
+            &:hover {
+                border: 1px solid $black;
+            }
+            &:focus {
+                border: 1px solid $black;
+            }
+            &:disabled {
+                &:hover {
+                    border: 2px solid $global-black-10;
+                }
+                border: 2px solid $global-black-10;
+            }
+        }
+        &__main-button {
+            margin-top: 20px;
+            background: $global-green;
+            height: 50px;
+            color: $white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            &:hover {
+                background: #02cc5a;
+            }
+            &:disabled {
+                &:hover {
+                    background: $global-black-10;
+                }
+                background: $global-black-10;
+            }
+        }
+        .lds-ring-container {
+            position: absolute;
+            right: -5px;
+            bottom: -5px;
+        }
+    }
+    &__register {
+        background: none;
+        margin-top: 15px;
+        text-align: center;
+        color: $link-color;
+        transition: 0.3s ease;
+        cursor: pointer;
+        &:hover {
+            color: $link-hover-color;
+        }
+        &:disabled {
+            &:hover {
+                color: $global-black-10;
+            }
+            color: $global-black-10;
+        }
+    }
+}

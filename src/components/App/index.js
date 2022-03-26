@@ -34,7 +34,7 @@ function App() {
                                 <Content/>
                             </main>
                         }/>
-                        <Route path="/c/:categoryID" element={
+                        <Route path="c/:categoryID" element={
                             <>
                                 <div className="main-container">
                                     <Category/>
@@ -42,7 +42,7 @@ function App() {
                                 <Footer/>
                             </>
                         }/>
-                        <Route path="/c/:categoryID/:productsID" element={
+                        <Route path="c/:categoryID/:productsID" element={
                             <>
                                 <div className="main-container">
                                     <ProductsCategory/>

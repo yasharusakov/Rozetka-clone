@@ -14,12 +14,15 @@ import AppStore from '../../resources/svg/App-Store.svg';
 import { setPopup } from '../../slices/globalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
+import useAuthState from '../../hooks/useAuthState';
+
 import './BurgerPanel.scss';
 
 function BurgerPanel() {
     const dispatch = useDispatch();
     const burgerPanel = useSelector(state => state.global.burgerPanel);
     const inCartLength = useSelector(state => state.inCart.inCart.length);
+    const [userState, loading, auth] = useAuthState();
 
     let classNames = "burger-panel";
 
@@ -47,24 +50,33 @@ function BurgerPanel() {
                             </div>
                         </div>
                         <div className="burger-panel__top__auth">
-                            <div className="burger-panel__auth-item burger-panel__top__auth-item_1">
+                            <div style={userState ? {marginTop: '0px'} : {}} className="burger-panel__auth-item burger-panel__top__auth-item_1">
                                 <img src={user} alt="user" />
                             </div>
-                            <div className="burger-panel__top__auth-item burger-panel__top__auth-item_2">
-                                <div className="burger-panel__top__auth-item__main">
-                                    <div onClick={() => {
-                                        dispatch(setPopup({name: 'burgerPanel', type: false}))
-                                        dispatch(setPopup({name: 'user', type: true}));
-                                    }}>Вход</div> 
-                                    <div onClick={() => {
-                                        dispatch(setPopup({name: 'burgerPanel', type: false}))
-                                        dispatch(setPopup({name: 'register', type: true}));
-                                    }}>Регистрация</div>
-                                </div>
-                                <div className="burger-panel__top__auth-item__text">
-                                    Авторизуйтесь для получения расширенных возможностей 
-                                </div>
-                            </div>
+                            {
+                                userState ? (
+                                    <div className="logout">
+                                        <button onClick={() => auth.signOut()}>Выйти</button>
+                                    </div>
+                                ) : 
+                                (
+                                    <div className="burger-panel__top__auth-item burger-panel__top__auth-item_2">
+                                        <div className="burger-panel__top__auth-item__main">
+                                            <div onClick={() => {
+                                                dispatch(setPopup({name: 'burgerPanel', type: false}))
+                                                dispatch(setPopup({name: 'login', type: true}));
+                                            }}>Вход</div> 
+                                            <div onClick={() => {
+                                                dispatch(setPopup({name: 'burgerPanel', type: false}))
+                                                dispatch(setPopup({name: 'register', type: true}));
+                                            }}>Регистрация</div>
+                                        </div>
+                                        <div className="burger-panel__top__auth-item__text">
+                                            Авторизуйтесь для получения расширенных возможностей 
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                     </section>
                     <section className="burger-panel__actions burger-panel-padding">

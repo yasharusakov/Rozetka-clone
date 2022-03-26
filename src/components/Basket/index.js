@@ -57,8 +57,26 @@ function Basket() {
         )
     }
 
+    const Counter = () => {
+        const [counter, setCounter] = useState(1);
+
+        return (
+            <div className="basket__additional__counter">
+                <button 
+                    disabled={counter === 1} 
+                    onClick={() => setCounter(counter => counter - 1)}>-</button>
+                <input 
+                    onBlur={(e) => e.target.value < 1 ? setCounter(1) : null} 
+                    value={counter} 
+                    onChange={(e) => setCounter(+e.target.value.replace(/\D/, ''))} 
+                    type="text" />
+                <button onClick={() => setCounter(counter => counter + 1)}>+</button>
+            </div>
+        )
+    }
+
     const elements = useMemo(() => {
-        return products.map(item => {
+        return products.map((item, index) => {
             return (
                 <Fragment key={item.productID}>
                     <div data-src={item.url} className="basket__element element-animation">
@@ -67,6 +85,10 @@ function Basket() {
                         </div>
                         <div className="basket__element__name">{item.name} <strong>/</strong> {item.characteristic}</div>
                         <Button value={item.productID} />
+                    </div>
+                    <div className="basket__additional">
+                        <Counter value={item.counter} index={index}/>
+                        <div className="basket__additional__price">{item.comparedPrice} ₴</div>
                     </div>
                     <div className="line"></div>
                 </Fragment>

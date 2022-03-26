@@ -56,6 +56,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            .logout {
+                button {
+                    padding: 0 20px;
+                    height: 35px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+            }
             &-item_1 {
                 margin-top: 20px;
                 margin-right: 20px;

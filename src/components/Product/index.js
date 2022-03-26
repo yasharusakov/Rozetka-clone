@@ -31,6 +31,8 @@ function Product() {
 
     useEffect(() => {
         requestProduct();
+
+        
     }, []);
 
     const routes = [

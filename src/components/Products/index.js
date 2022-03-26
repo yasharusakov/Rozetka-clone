@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { collection, getFirestore, onSnapshot, query, where } from "firebase/firestore";
+import { collection, getFirestore, onSnapshot, query, where, orderBy, startAt } from "firebase/firestore";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { setItems } from '../../slices/itemsSlice';
@@ -26,19 +26,17 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
 
     const requestProducts = () => {
         
-        const q = query(collection(db, 'products'), where(filterName, symbol, filterType));
+        let q = query(collection(db, 'products'), where(filterName, symbol, filterType));
 
-        const unsub = onSnapshot(q, (snapshot) => {
+        onSnapshot(q, (snapshot) => {
             const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}));
             setProducts(items);
             if (useSetItems) dispatch(setItems(items))
         });
-
-        return unsub;
     }
 
     useEffect(() => {
-        requestProducts();
+        return requestProducts();
     }, [])
 
     useEffect(() => {

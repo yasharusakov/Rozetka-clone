@@ -14,7 +14,7 @@ const inCartSlice = createSlice({
     reducers: {
         setAllToCart(state) {
             const products = cookies.getItem('products');
-            if (products) state.inCart = products.split(',');
+            if (products) state.inCart = products.split(',')
         },
         addToCart(state, action) {
             state.inCart.unshift(action.payload);

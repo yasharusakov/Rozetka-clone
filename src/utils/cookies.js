@@ -30,7 +30,6 @@ class Cookies {
         const filtered = products.filter(item => item !== value);
         const back = filtered.join(',');
         this.setItem('products', back);
-        console.log(back);
     }
 }
 
