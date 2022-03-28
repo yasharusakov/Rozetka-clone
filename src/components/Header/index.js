@@ -16,6 +16,8 @@ import Basket from '../Basket';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNavigate } from 'react-router-dom';
+
 import { setPopup } from '../../slices/globalSlice';
 
 import useAuthState from '../../hooks/useAuthState';
@@ -23,10 +25,18 @@ import useAuthState from '../../hooks/useAuthState';
 import './Header.scss';
 
 function Header() {
+    const navigate = useNavigate();
     const [userState, loading, auth] = useAuthState();
     const [searchValue, setSearchValue] = useState('');
     const dispatch = useDispatch();
     const inCart = useSelector(state => state.inCart.inCart);
+
+    const redirectToSearch = (e) => {
+        e.preventDefault();
+        if (searchValue !== '') {
+            navigate(`search/${searchValue}`);
+        }
+    }
 
     return (
         <header className="header wrapper__header">
@@ -44,7 +54,7 @@ function Header() {
                     <img src={catalog} alt="catalog" />
                     Каталог
                 </button>
-                <form className="header__search-form">
+                <form onSubmit={redirectToSearch} className="header__search-form">
                     <img src={search} alt="search" />
                     <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Я ищу..." type="text" />
                     <button type="submit" className="header__search-form__submit">Найти</button>

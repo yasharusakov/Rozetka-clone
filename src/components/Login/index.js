@@ -22,6 +22,10 @@ function Login() {
                 setEmail('');
                 setPassword('');
                 setLoading(false);
+
+                setTimeout(() => {
+                    dispatch(setPopup({name: 'login', type: false}));
+                }, 500);
             })
             .catch(() => {
                 setLoading(false);
@@ -34,7 +38,7 @@ function Login() {
                 <span>Эл. почта</span>
                 <input disabled={loading} required value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
                 <span>Пароль</span>
-                <input disabled={loading} required value={password} onChange={(e) => setPassword(e.target.value)} type="text" />
+                <input disabled={loading} required value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
                 <button disabled={loading} className="register-login__form__main-button">Войти</button>
                {loading ? <Loader/> : null}
                 <button disabled={loading} type="button" onClick={() => {

@@ -17,7 +17,7 @@ import addDotForNumbers from '../../utils/addDotForNumbers';
 
 import './Products.scss';
 
-function Products({header, filterName, symbol, filterType, limitProducts, useSetItems}) {
+function Products({header, filterName, symbol, filterType, limitProducts, useSetItems, useData, data}) {
     const dispatch = useDispatch();
     const filter = useSelector(state => state.filter);
     const db = getFirestore();
@@ -26,18 +26,29 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
 
     const requestProducts = () => {
         
-        let q = query(collection(db, 'products'), where(filterName, symbol, filterType));
+        if (useData) {
+            const collectionRef = collection(db, 'products');
 
-        onSnapshot(q, (snapshot) => {
-            const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}));
-            setProducts(items);
-            if (useSetItems) dispatch(setItems(items))
-        });
+            onSnapshot(collectionRef, (snapshot) => {
+                const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}));
+                const filteredData = items.filter(item => item.name.search(RegExp(data, 'ig')) !== -1);
+                setProducts(filteredData);
+                if (useSetItems) dispatch(setItems(filteredData));
+            });
+        } else {
+            let q = query(collection(db, 'products'), where(filterName, symbol, filterType));
+
+            onSnapshot(q, (snapshot) => {
+                const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}));
+                setProducts(items);
+                if (useSetItems) dispatch(setItems(items));
+            });
+        }
     }
 
     useEffect(() => {
         return requestProducts();
-    }, [])
+    }, [data])
 
     useEffect(() => {
         observer();

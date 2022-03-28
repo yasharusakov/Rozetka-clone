@@ -56,6 +56,14 @@ function App() {
                                 <Footer/>
                             </>
                         }/>
+                        <Route path="search/:data" element={
+                            <>
+                                <div className="main-container">
+                                    <ProductsCategory useData={true}/>
+                                </div>
+                                <Footer/>
+                            </>
+                        }/>
                     </Routes>
                 </div>
             </div>

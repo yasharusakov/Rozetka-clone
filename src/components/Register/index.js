@@ -73,7 +73,7 @@ function Register() {
                 <span>Эл. почта</span>
                 <input disabled={loading} className="register-login__form__email" value={email} onChange={(e) => setEmail(e.target.value)} required type="email" />
                 <span>Придумайте пароль</span>
-                <input disabled={loading} className="register-login__form__password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={6} required type="text" />
+                <input disabled={loading} className="register-login__form__password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={6} required type="password" />
                 <button disabled={loading} className="register-login__form__main-button" type="submit">Зарегистрироваться</button>
                 {loading ? <Loader/> : null}
                 <button type="button" disabled={loading} onClick={() => {

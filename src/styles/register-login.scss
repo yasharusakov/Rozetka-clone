@@ -16,13 +16,12 @@
             height: 48px;
             border: 1px solid $global-black-20;
             border-radius: 4px;
-            transition: 0.3s ease;
             padding: 10px;
             &:hover {
                 border: 1px solid $black;
             }
             &:focus {
-                border: 1px solid $black;
+                outline: 3px solid $global-light-blue;
             }
             &:disabled {
                 &:hover {

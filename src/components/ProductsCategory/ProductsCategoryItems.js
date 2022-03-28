@@ -1,6 +1,6 @@
 import Products from '../Products';
 
-function ProductsCategoryItems({productsID}) {
+function ProductsCategoryItems({productsID, useData, data}) {
     return (
         <div className="products-category__items">
             <Products 
@@ -9,6 +9,8 @@ function ProductsCategoryItems({productsID}) {
                 filterType={productsID} 
                 limitProducts={false}
                 useSetItems={true}
+                useData={useData}
+                data={data}
             />
         </div>
     )

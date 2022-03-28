@@ -11,8 +11,8 @@ import ProductsCategoryItems from './ProductsCategoryItems';
 
 import './ProductsCategory.scss';
 
-function ProductsCategory() {
-    const {categoryID, productsID} = useParams();
+function ProductsCategory({useData}) {
+    const {categoryID, productsID, data} = useParams();
 
     const dispatch = useDispatch();
     
@@ -36,7 +36,7 @@ function ProductsCategory() {
 
     return (
         <div className="products-category">
-            <div className="products-category__title">{productsID}</div>
+            <div className="products-category__title">{useData ? data : productsID}</div>
             <div className="products-category__filters">
                 <div onClick={() => dispatch(setPopup({name: 'filter', type: true}))} className="products-category__filters__filter">Фильтры</div>
                 <SortBy/>
@@ -49,6 +49,8 @@ function ProductsCategory() {
                 />
                 <ProductsCategoryItems 
                     productsID={productsID}
+                    data={data}
+                    useData={useData}
                 />
             </div>
         </div>
