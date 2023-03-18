@@ -1,7 +1,7 @@
-@import './mixins.scss';
-@import './spoiler.scss';
-@import './observer.scss';
-@import './register-login.scss';
+@import 'mixins';
+@import 'spoiler';
+@import 'observer';
+@import 'register-login';
 
 @include font('Roboto', 'Roboto-Bold', 700, normal);
 

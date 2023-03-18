@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react'
 
-import prev from '../../resources/images/slider/prev.png';
-import next from '../../resources/images/slider/next.png';
+import prev from '../../assets/resources/images/slider/prev.png'
+import next from '../../assets/resources/images/slider/next.png'
 
-import Swiper from 'swiper/bundle';
+import Swiper from 'swiper/bundle'
 
-import 'swiper/css/bundle';
+import 'swiper/css/bundle'
 
 function CategorySmallSlider({pictures = []}) {
     useEffect(() => {
@@ -37,17 +37,17 @@ function CategorySmallSlider({pictures = []}) {
                     slidesPerView: 6
                 }
             }
-        });
-    }, []);
+        })
+    }, [])
 
     const elements = pictures.map((item, i) => {
         return (
             <div key={i} className="swiper-slide category-small-slider-slide">
-                <img data-src={item} className="swiper-lazy" alt={item} />
+                <img data-src={item} className="swiper-lazy" alt={item}/>
                 <div className="swiper-lazy-preloader"></div>
             </div>
         )
-    });
+    })
 
     return (
         <div className="swiper category-small-slider">
@@ -55,13 +55,13 @@ function CategorySmallSlider({pictures = []}) {
                 {elements}
             </div>
             <div className="swiper-button-prev category-small-slider-prev">
-                <img src={prev} alt="prev" />
+                <img src={prev} alt="prev"/>
             </div>
             <div className="swiper-button-next category-small-slider-next">
-                <img src={next} alt="next" />
+                <img src={next} alt="next"/>
             </div>
         </div>
     )
 }
 
-export default CategorySmallSlider;
+export default CategorySmallSlider

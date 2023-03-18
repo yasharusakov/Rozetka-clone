@@ -1,25 +1,21 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-import Header from '../Header';
-import SideBar from '../SideBar';
-import Content from '../Content';
-import Category from '../Category';
-import ProductsCategory from '../ProductsCategory';
-import Product from '../Product';
-import Footer from '../Footer';
-
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setAllToCart } from '../../slices/inCartSlice';
-
-import '../../styles/style.scss';
-import './App.scss';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import Header from '../Header'
+import SideBar from '../SideBar'
+import Content from '../Content'
+import Category from '../Category'
+import ProductsCategory from '../ProductsCategory'
+import Product from '../Product'
+import Footer from '../Footer'
+import {useEffect} from 'react'
+import {useActions} from '../../hooks/useActions'
+import '../../assets/styles/style.scss'
+import './style.scss'
 
 function App() {
-    const dispatch = useDispatch();
+    const {setAllToCart} = useActions()
 
     useEffect(() => {
-        dispatch(setAllToCart())
+        setAllToCart()
     }, [])
 
     return (
@@ -71,4 +67,4 @@ function App() {
     )
 }
 
-export default App;
+export default App

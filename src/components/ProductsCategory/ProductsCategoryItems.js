@@ -1,12 +1,12 @@
-import Products from '../Products';
+import Products from '../Products'
 
 function ProductsCategoryItems({productsID, useData, data}) {
     return (
         <div className="products-category__items">
-            <Products 
-                filterName="type" 
-                symbol="array-contains" 
-                filterType={productsID} 
+            <Products
+                filterName="type"
+                symbol="array-contains"
+                filterType={productsID}
                 limitProducts={false}
                 useSetItems={true}
                 useData={useData}
@@ -16,4 +16,4 @@ function ProductsCategoryItems({productsID, useData, data}) {
     )
 }
 
-export default ProductsCategoryItems;
+export default ProductsCategoryItems

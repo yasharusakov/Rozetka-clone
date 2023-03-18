@@ -1,39 +1,31 @@
-import { NavLink, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-
-import waranty from '../../resources/images/waranty.png';
-import creditCard from '../../resources/images/credit-card.png';
-import heart from '../../resources/svg/heart.svg';
-
-import addDotForNumbers from '../../utils/addDotForNumbers';
-
-import { addToCart } from '../../slices/inCartSlice';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { setPopup } from '../../slices/globalSlice';
-
-import './Product.scss';
+import {NavLink, useParams} from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {doc, getDoc, getFirestore} from 'firebase/firestore'
+import waranty from '../../assets/resources/images/waranty.png'
+import creditCard from '../../assets/resources/images/credit-card.png'
+import heart from '../../assets/resources/svg/heart.svg'
+import addDotForNumbers from '../../utils/addDotForNumbers'
+import {useSelector} from 'react-redux'
+import {useActions} from '../../hooks/useActions'
+import './style.scss'
 
 function Product() {
-    const db = getFirestore();
-    const dispatch = useDispatch();
-    const {productID} = useParams();
-    const [product, setProduct] = useState({});
-    const inCart = useSelector(state => state.inCart.inCart);
+    const db = getFirestore()
+    const {addToCart, setPopup} = useActions()
+    const {productID} = useParams()
+    const [product, setProduct] = useState({})
+    const inCart = useSelector(state => state.inCart.inCart)
 
     const requestProduct = async () => {
-        const docRef = doc(db, 'products', productID);
-        const docSnap = await getDoc(docRef);
+        const docRef = doc(db, 'products', productID)
+        const docSnap = await getDoc(docRef)
 
-        setProduct(docSnap.data());
+        setProduct(docSnap.data())
     }
 
     useEffect(() => {
-        requestProduct();
-
-        
-    }, []);
+        requestProduct()
+    }, [])
 
     const routes = [
         {
@@ -62,12 +54,12 @@ function Product() {
         }
     ]
 
-    const isActive = ({isActive}) => isActive ? 'product__navigation__product product__navigation__product_active' : 'product__navigation__product';
+    const isActive = ({isActive}) => isActive ? 'product__navigation__product product__navigation__product_active' : 'product__navigation__product'
 
     const price2 = addDotForNumbers(product.price),
-          stockPrice2 = addDotForNumbers(product.stockPrice);
+        stockPrice2 = addDotForNumbers(product.stockPrice)
 
-    const hasItInCart = inCart.some(item => item === productID);
+    const hasItInCart = inCart.some(item => item === productID)
 
     return (
         <div className="product">
@@ -84,7 +76,7 @@ function Product() {
             <div className="product__row main-container">
                 <div className="product__item product__item_1">
                     <div className="product__item_1__picture">
-                        <img src={product.url} alt={product.title} />
+                        <img src={product.url} alt={product.title}/>
                     </div>
                     <div className="product__item_1__characteristic">
                         {product.characteristic}
@@ -94,45 +86,52 @@ function Product() {
                     <div className="product__item_2__element">
                         <div className="product__item_2__element-price">
                             {
-                                product.stockPrice !== false ? 
+                                product.stockPrice !== false ?
                                     (
                                         <>
-                                            <div className="product__item_2__element-price-default product__item_2__element-price-default-line-through">{price2} ₴</div>
-                                            <div className="product__item_2__element-price-stockPrice">{stockPrice2} ₴</div>
+                                            <div
+                                                className="product__item_2__element-price-default product__item_2__element-price-default-line-through">{price2} ₴
+                                            </div>
+                                            <div className="product__item_2__element-price-stockPrice">{stockPrice2} ₴
+                                            </div>
                                         </>
                                     ) :
                                     <div className="product__item_2__element-price-default">{price2} ₴</div>
                             }
                         </div>
                         {
-                            hasItInCart ? 
-                                <div 
-                                    onClick={() => dispatch(setPopup({name: 'basket', type: true}))} 
-                                    className="product__item_2__element-inCart">В корзине
-                                </div> 
-                                : 
+                            hasItInCart ?
                                 <div
-                                    onClick={() => dispatch(addToCart(productID))}
+                                    onClick={() => setPopup({name: 'basket', type: true})}
+                                    className="product__item_2__element-inCart">В корзине
+                                </div>
+                                :
+                                <div
+                                    onClick={() => addToCart(productID)}
                                     className="product__item_2__element-buy">Купить
                                 </div>
                         }
                         <div className="product__item_2__element-heart">
-                            <img src={heart} alt="heart" />
+                            <img src={heart} alt="heart"/>
                         </div>
                     </div>
                     <div className="product__item_2__element product__item_2__element_2">
                         <div className="product__item_2__element_2__item">
                             <div className="product__item_2__element_2__item__picture">
-                                <img src={waranty} alt="waranty" />
+                                <img src={waranty} alt="waranty"/>
                             </div>
-                            <div className="product__item_2__element_2__item__text"><strong>Оплата.</strong> Google Pay, Картой онлайн, Безналичными для юридических лиц, PrivatPay, Apple Pay</div>
+                            <div className="product__item_2__element_2__item__text"><strong>Оплата.</strong> Google Pay,
+                                Картой онлайн, Безналичными для юридических лиц, PrivatPay, Apple Pay
+                            </div>
                         </div>
                         <div className="line"></div>
                         <div className="product__item_2__element_2__item">
                             <div className="product__item_2__element_2__item__picture">
-                                <img src={creditCard} alt="credit-card" />
+                                <img src={creditCard} alt="credit-card"/>
                             </div>
-                            <div className="product__item_2__element_2__item__text"><strong>Гарантия.</strong> 12 месяцев Обмен/возврат товара в течение 14 дней </div>
+                            <div className="product__item_2__element_2__item__text"><strong>Гарантия.</strong> 12
+                                месяцев Обмен/возврат товара в течение 14 дней
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,4 +140,4 @@ function Product() {
     )
 }
 
-export default Product;
+export default Product

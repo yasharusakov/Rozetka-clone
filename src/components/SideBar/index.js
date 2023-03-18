@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom'
 
-import desktop from '../../resources/images/catalog/desktop.png';
-import console from '../../resources/images/catalog/console.png';
-import iphone from '../../resources/images/catalog/iphone.png';
-import GooglePlay from '../../resources/svg/Google-Play.svg';
-import AppStore from '../../resources/svg/App-Store.svg';
-import mastercard from '../../resources/svg/mastercard.svg';
-import visa from '../../resources/svg/visa.svg';
+import desktop from '../../assets/resources/images/catalog/desktop.png'
+import console from '../../assets/resources/images/catalog/console.png'
+import iphone from '../../assets/resources/images/catalog/iphone.png'
+import GooglePlay from '../../assets/resources/svg/Google-Play.svg'
+import AppStore from '../../assets/resources/svg/App-Store.svg'
+import mastercard from '../../assets/resources/svg/mastercard.svg'
+import visa from '../../assets/resources/svg/visa.svg'
 
-import './SideBar.scss';
+import './style.scss'
 
 function SideBar() {
     return (
@@ -16,15 +16,15 @@ function SideBar() {
             <div className="sidebar__container">
                 <div className="sidebar__catalog">
                     <Link to="/c/computers-notebooks" className="sidebar__catalog-item">
-                        <img src={desktop} alt="desktop" className="sidebar__catalog-item-icon" />
+                        <img src={desktop} alt="desktop" className="sidebar__catalog-item-icon"/>
                         <span className="sidebar__catalog-item-title">Ноутбуки и компьютеры</span>
                     </Link>
                     <a href="" className="sidebar__catalog-item">
-                        <img src={iphone} alt="iphone" className="sidebar__catalog-item-icon" />
+                        <img src={iphone} alt="iphone" className="sidebar__catalog-item-icon"/>
                         <span className="sidebar__catalog-item-title">Смартфоны, ТВ и электроника</span>
                     </a>
                     <a href="" className="sidebar__catalog-item">
-                        <img src={console} alt="console" className="sidebar__catalog-item-icon" />
+                        <img src={console} alt="console" className="sidebar__catalog-item-icon"/>
                         <span className="sidebar__catalog-item-title">Товары для геймеров</span>
                     </a>
                 </div>
@@ -32,8 +32,8 @@ function SideBar() {
                 <div className="sidebar__our-apps">
                     <div className="sidebar__our-apps__title sidebar-title">Скачивайте наши приложения</div>
                     <div className="sidebar__our-apps__apps">
-                        <img src={GooglePlay} alt="GooglePlay" />
-                        <img src={AppStore} alt="AppStore" />
+                        <img src={GooglePlay} alt="GooglePlay"/>
+                        <img src={AppStore} alt="AppStore"/>
                     </div>
                 </div>
                 <div className="line"></div>
@@ -77,17 +77,17 @@ function SideBar() {
                 <div className="sidebar__pay">
                     <div className="sidebar__pay__payments">
                         <a className="sidebar__pay__payments__link">
-                            <img src={mastercard} alt="mastercard" />
+                            <img src={mastercard} alt="mastercard"/>
                         </a>
                         <a className="sidebar__pay__payments__link">
-                            <img src={visa} alt="visa" />
+                            <img src={visa} alt="visa"/>
                         </a>
                     </div>
                     <div className="sidebar__pay__text">
                         ТМ используется на основании лицензии правообладателя RozetkaLTD.
                     </div>
                     <div className="sidebar__pay__copyright">
-                        © Интернет-магазин «Розетка™» <br />
+                        © Интернет-магазин «Розетка™» <br/>
                         2001–2022
                     </div>
                 </div>
@@ -97,4 +97,4 @@ function SideBar() {
     )
 }
 
-export default SideBar;
+export default SideBar

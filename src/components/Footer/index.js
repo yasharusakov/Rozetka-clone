@@ -1,10 +1,10 @@
-import GooglePlay from '../../resources/svg/Google-Play.svg';
-import AppStore from '../../resources/svg/App-Store.svg';
+import GooglePlay from '../../assets/resources/svg/Google-Play.svg'
+import AppStore from '../../assets/resources/svg/App-Store.svg'
 
-import mastercard from '../../resources/svg/mastercard.svg';
-import visa from '../../resources/svg/visa.svg';
+import mastercard from '../../assets/resources/svg/mastercard.svg'
+import visa from '../../assets/resources/svg/visa.svg'
 
-import './Footer.scss';
+import './style.scss'
 
 function Footer() {
     return (
@@ -13,8 +13,8 @@ function Footer() {
                 <div className="footer__our-apps">
                     <div className="footer__our-apps__title">Скачивайте наши приложения</div>
                     <div className="footer__our-apps__apps">
-                        <img src={GooglePlay} alt="GooglePlay" />
-                        <img src={AppStore} alt="AppStore" />
+                        <img src={GooglePlay} alt="GooglePlay"/>
+                        <img src={AppStore} alt="AppStore"/>
                     </div>
                 </div>
                 <div className="footer__more">
@@ -57,13 +57,14 @@ function Footer() {
                         <div className="footer__pay-row">
                             <div className="footer__pay-item">
                                 <div className="footer__pay-item-pays">
-                                    <img src={mastercard} alt="mastercard" />
-                                    <img src={visa} alt="visa" />
+                                    <img src={mastercard} alt="mastercard"/>
+                                    <img src={visa} alt="visa"/>
                                 </div>
                             </div>
                             <div className="footer__pay-item">
                                 <div className="footer__pay-item-copyright">
-                                    © Интернет-магазин «Розетка™»2001–2022  ТМ используется на основании лицензии правообладателя RozetkaLTD
+                                    © Интернет-магазин «Розетка™»2001–2022 ТМ используется на основании лицензии
+                                    правообладателя RozetkaLTD
                                 </div>
                             </div>
                         </div>
@@ -74,4 +75,4 @@ function Footer() {
     )
 }
 
-export default Footer;
+export default Footer

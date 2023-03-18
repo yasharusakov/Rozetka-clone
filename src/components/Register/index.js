@@ -1,35 +1,31 @@
-import { useEffect, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { setPopup } from '../../slices/globalSlice';
-
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, setDoc, serverTimestamp, doc } from 'firebase/firestore';
-
-import mask from '../../utils/mask';
-
-import Loader from '../Loader';
+import {useEffect, useState, useRef} from 'react'
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth'
+import {getFirestore, setDoc, serverTimestamp, doc} from 'firebase/firestore'
+import mask from '../../utils/mask'
+import Loader from '../Loader'
+import {useActions} from '../../hooks/useActions'
 
 function Register() {
-    const dispatch = useDispatch();
-    const db = getFirestore();
-    const auth = getAuth();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
-    const ref = useRef(null);
+    const {setPopup} = useActions()
+    const db = getFirestore()
+    const auth = getAuth()
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+    const ref = useRef(null)
 
     const createUser = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        setLoading(true);
+        setLoading(true)
 
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
 
-                const user = userCredential.user;
+                const user = userCredential.user
 
                 setDoc(doc(db, 'users', user.uid), {
                     firstName: firstName,
@@ -38,51 +34,59 @@ function Register() {
                     email: email,
                     password: password,
                     createdAt: serverTimestamp()
-                });
+                })
 
-                setFirstName('');
-                setLastName('');
-                setEmail('');
-                setPhoneNumber('');
-                setPassword('');
-                setLoading(false);
+                setFirstName('')
+                setLastName('')
+                setEmail('')
+                setPhoneNumber('')
+                setPassword('')
+                setLoading(false)
 
                 setTimeout(() => {
-                    dispatch(setPopup({name: 'register', type: false}));
-                }, 500);
+                    setPopup({name: 'register', type: false})
+                }, 500)
 
             })
             .catch(() => {
-                setLoading(false);
-            });
+                setLoading(false)
+            })
     }
 
     useEffect(() => {
-        mask(ref.current, setPhoneNumber);
-    }, []);
+        mask(ref.current, setPhoneNumber)
+    }, [])
 
     return (
         <div className="register-login">
             <form onSubmit={createUser} className="register-login__form">
                 <span>Имя</span>
-                <input disabled={loading} className="register-login__form__firstname" value={firstName} onChange={(e) => setFirstName(e.target.value)} required type="text" />
+                <input disabled={loading} className="register-login__form__firstname" value={firstName}
+                       onChange={(e) => setFirstName(e.target.value)} required type="text"/>
                 <span>Фамилия</span>
-                <input disabled={loading} className="register-login__form__lastname" value={lastName} onChange={(e) => setLastName(e.target.value)} required type="text" />
+                <input disabled={loading} className="register-login__form__lastname" value={lastName}
+                       onChange={(e) => setLastName(e.target.value)} required type="text"/>
                 <span>Номер телефона</span>
-                <input ref={ref} disabled={loading} className="register-login__form__numberPhone" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required type="text" />
+                <input ref={ref} disabled={loading} className="register-login__form__numberPhone" value={phoneNumber}
+                       onChange={(e) => setPhoneNumber(e.target.value)} required type="text"/>
                 <span>Эл. почта</span>
-                <input disabled={loading} className="register-login__form__email" value={email} onChange={(e) => setEmail(e.target.value)} required type="email" />
+                <input disabled={loading} className="register-login__form__email" value={email}
+                       onChange={(e) => setEmail(e.target.value)} required type="email"/>
                 <span>Придумайте пароль</span>
-                <input disabled={loading} className="register-login__form__password" value={password} onChange={(e) => setPassword(e.target.value)} minLength={6} required type="password" />
-                <button disabled={loading} className="register-login__form__main-button" type="submit">Зарегистрироваться</button>
+                <input disabled={loading} className="register-login__form__password" value={password}
+                       onChange={(e) => setPassword(e.target.value)} minLength={6} required type="password"/>
+                <button disabled={loading} className="register-login__form__main-button"
+                        type="submit">Зарегистрироваться
+                </button>
                 {loading ? <Loader/> : null}
                 <button type="button" disabled={loading} onClick={() => {
-                    dispatch(setPopup({name: 'register', type: false}));
-                    dispatch(setPopup({name: 'login', type: true}));
-                }} className="register-login__register">Я уже зарегистрирован</button>
+                    setPopup({name: 'register', type: false})
+                    setPopup({name: 'login', type: true})
+                }} className="register-login__register">Я уже зарегистрирован
+                </button>
             </form>
         </div>
     )
 }
 
-export default Register;
+export default Register

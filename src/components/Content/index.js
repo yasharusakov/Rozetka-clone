@@ -1,18 +1,18 @@
-import MainSlider from '../MainSlider';
-import Products from '../Products';
+import MainSlider from '../MainSlider'
+import Products from '../Products'
 
-import './Content.scss';
+import './style.scss'
 
 function Content() {
     return (
         <div className="content">
             <div className="content__container">
                 <MainSlider/>
-                <Products 
-                    header="Акционные предложения" 
-                    filterName="categoryType" 
-                    symbol="==" 
-                    filterType="promotionalOffers" 
+                <Products
+                    header="Акционные предложения"
+                    filterName="categoryType"
+                    symbol="=="
+                    filterType="promotionalOffers"
                     limitProducts={5}
                 />
             </div>
@@ -20,4 +20,4 @@ function Content() {
     )
 }
 
-export default Content;
+export default Content

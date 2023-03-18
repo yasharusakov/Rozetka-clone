@@ -1,53 +1,72 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setPopup } from '../../slices/globalSlice';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
-import Loader from '../Loader';
+import {useState} from 'react'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import Loader from '../Loader'
+import {useActions} from '../../hooks/useActions'
 
 function Login() {
-    const dispatch = useDispatch();
-    const auth = getAuth(); 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loading, setLoading] = useState(false);
+    const {setPopup} = useActions()
+    const auth = getAuth()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const signIn = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        setLoading(true);
+        setLoading(true)
 
         await signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                setEmail('');
-                setPassword('');
-                setLoading(false);
+                setEmail('')
+                setPassword('')
+                setLoading(false)
 
                 setTimeout(() => {
-                    dispatch(setPopup({name: 'login', type: false}));
-                }, 500);
+                    setPopup({name: 'login', type: false})
+                }, 500)
             })
             .catch(() => {
-                setLoading(false);
-            });
+                setLoading(false)
+            })
     }
 
     return (
         <div className="register-login">
             <form onSubmit={signIn} className="register-login__form">
                 <span>Эл. почта</span>
-                <input disabled={loading} required value={email} onChange={(e) => setEmail(e.target.value)} type="text" />
+                <input
+                    disabled={loading}
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                />
                 <span>Пароль</span>
-                <input disabled={loading} required value={password} onChange={(e) => setPassword(e.target.value)} type="password" />
-                <button disabled={loading} className="register-login__form__main-button">Войти</button>
-               {loading ? <Loader/> : null}
-                <button disabled={loading} type="button" onClick={() => {
-                    dispatch(setPopup({name: 'login', type: false}));
-                    dispatch(setPopup({name: 'register', type: true}));
-                }} className="register-login__register">Зарегистрироваться</button>
+                <input
+                    disabled={loading}
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                />
+                <button disabled={loading} className="register-login__form__main-button">
+                    Войти
+                </button>
+                {loading && <Loader/>}
+                <button
+                    disabled={loading}
+                    type="button"
+                    onClick={() => {
+                        setPopup({name: 'login', type: false})
+                        setPopup({name: 'register', type: true})
+                    }}
+                    className="register-login__register"
+                >
+                    Зарегистрироваться
+                </button>
             </form>
         </div>
     )
 }
 
-export default Login;
+export default Login

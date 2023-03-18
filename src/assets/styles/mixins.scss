@@ -1,5 +1,5 @@
 // Подключение переменных
-@import './variables.scss';
+@import 'variables';
 
 // Подключение шрифтов
 @mixin font($font_name, $file_name, $weight, $style) {

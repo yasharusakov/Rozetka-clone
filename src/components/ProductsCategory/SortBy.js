@@ -1,12 +1,10 @@
-import { useDispatch } from "react-redux";
-
-import { setSortBy } from "../../slices/filterSlice";
+import {useActions} from '../../hooks/useActions'
 
 function SortBy() {
-    const dispatch = useDispatch();
+    const {setSortBy} = useActions()
 
     return (
-        <select defaultValue onChange={(e) => dispatch(setSortBy(e.target.value))} >
+        <select defaultValue onChange={(e) => setSortBy(e.target.value)}>
             <option value>-Выберите фильтр-</option>
             <option value="from-cheap-to-expensive">От дешевых к дорогим</option>
             <option value="from-expensive-to-cheap">От дорогих к дешевым</option>
@@ -14,4 +12,4 @@ function SortBy() {
     )
 }
 
-export default SortBy;
+export default SortBy

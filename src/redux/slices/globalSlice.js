@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit'
 
-import scroll from '../utils/scroll';
+import scroll from '../../utils/scroll'
 
 const initialState = {
     burgerPanel: false,
@@ -16,14 +16,14 @@ const globalSlice = createSlice({
     initialState,
     reducers: {
         setPopup: (state, action) => {
-            state[action.payload.name] = action.payload.type;
-            scroll(action.payload.type);
+            state[action.payload.name] = action.payload.type
+            scroll(action.payload.type)
         }
     }
-});
+})
 
-export default globalSlice.reducer;
+export default globalSlice.reducer
 
 export const {
     setPopup
-} = globalSlice.actions;
+} = globalSlice.actions
