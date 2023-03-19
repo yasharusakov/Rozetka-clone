@@ -1,10 +1,9 @@
 import {Link} from 'react-router-dom'
+import {useActions} from '../../hooks/useActions'
 import console from '../../assets/resources/images/catalog/console.png'
 import desktop from '../../assets/resources/images/catalog/desktop.png'
 import iphone from '../../assets/resources/images/catalog/iphone.png'
-
 import './style.scss'
-import {useActions} from '../../hooks/useActions'
 
 function Catalog() {
     const {setPopup} = useActions()
@@ -13,20 +12,22 @@ function Catalog() {
         setPopup({name: 'catalog', type: false})
     }
 
+    const array = [
+        {to: '/c/computers-notebooks', src: desktop, text: 'Ноутбуки и компьютеры'},
+        {to: '/c/phones', src: iphone, text: 'Смартфоны, ТВ и электроника'},
+        {to: '/c/consoles', src: console, text: 'Товары для геймеров'}
+    ]
+
     return (
         <div className="catalog">
-            <Link onClick={closeCatalog} to="/c/computers-notebooks" className="catalog-item">
-                <img src={desktop} alt="desktop"/>
-                <div className="catalog-item-text">Ноутбуки и компьютеры</div>
-            </Link>
-            <a onClick={closeCatalog} className="catalog-item">
-                <img src={iphone} alt="iphone"/>
-                <div className="catalog-item-text">Смартфоны, ТВ и электроника</div>
-            </a>
-            <a onClick={closeCatalog} className="catalog-item">
-                <img src={console} alt="console"/>
-                <div className="catalog-item-text">Товары для геймеров</div>
-            </a>
+            {array.map(({to, src, text}, i) => {
+                return (
+                    <Link key={i} onClick={closeCatalog} to={to} className="catalog-item">
+                        <img src={src} alt={text}/>
+                        <div className="catalog-item-text">{text}</div>
+                    </Link>
+                )
+            })}
         </div>
     )
 }

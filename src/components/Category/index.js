@@ -1,12 +1,9 @@
 import {useParams} from 'react-router-dom'
 import {useEffect, useState} from 'react'
-
 import {doc, getDoc, getFirestore} from 'firebase/firestore'
-
 import CategoryBigSlider from './CategoryBigSlider'
 import CategorySmallSlider from './CategorySmallSlider'
 import CategoryItems from './CategoryItems'
-
 import './style.scss'
 
 function Category() {

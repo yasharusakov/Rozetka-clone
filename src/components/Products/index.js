@@ -1,6 +1,3 @@
-import heart from '../../assets/resources/svg/heart.svg'
-import goodstub from '../../assets/resources/svg/goods-stub.svg'
-
 import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {collection, getFirestore, onSnapshot, query, where} from 'firebase/firestore'
@@ -9,6 +6,8 @@ import {filterByBrends, filterBySort} from '../../redux/slices/filterSlice'
 import observer from '../../utils/observer'
 import addDotForNumbers from '../../utils/addDotForNumbers'
 import {useActions} from '../../hooks/useActions'
+import heart from '../../assets/resources/svg/heart.svg'
+import goodstub from '../../assets/resources/svg/goods-stub.svg'
 import './style.scss'
 
 function Products({header, filterName, symbol, filterType, limitProducts, useSetItems, useData, data}) {
@@ -29,15 +28,17 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
                 setProducts(filteredData)
                 if (useSetItems) setItems(filteredData)
             })
-        } else {
-            let q = query(collection(db, 'products'), where(filterName, symbol, filterType))
 
-            onSnapshot(q, (snapshot) => {
-                const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}))
-                setProducts(items)
-                if (useSetItems) setItems(items)
-            })
+            return
         }
+
+        let q = query(collection(db, 'products'), where(filterName, symbol, filterType))
+
+        onSnapshot(q, (snapshot) => {
+            const items = snapshot.docs.map(doc => ({...doc.data(), productID: doc.id}))
+            setProducts(items)
+            if (useSetItems) setItems(items)
+        })
     }
 
     useEffect(() => {
@@ -98,14 +99,20 @@ function Products({header, filterName, symbol, filterType, limitProducts, useSet
     return (
         <div className="products">
             <div className="products__container">
-                {header ? <div className="products__category-name">{header}</div> : null}
+                {header && <div className="products__category-name">{header}</div>}
                 <div style={{marginTop: header ? '25px' : '0'}} className="products__items">
                     {elements}
                 </div>
                 {
-                    limitProducts ? <button style={{display: productsLimit === products.length ? 'none' : ''}}
-                                            onClick={() => setProductsLimit((productsLimit) => productsLimit + 5)}
-                                            className="products__show-more">Показать еще</button> : null
+                    limitProducts && (
+                        <button
+                            style={{display: productsLimit === products.length ? 'none' : ''}}
+                            onClick={() => setProductsLimit((productsLimit) => productsLimit + 5)}
+                            className="products__show-more"
+                        >
+                            Показать еще
+                        </button>
+                    )
                 }
             </div>
         </div>

@@ -14,19 +14,17 @@ function Basket() {
     const [products, setProducts] = useState([])
 
     const requestProduct = async () => {
-        const items = []
-
-        for (let i = 0; i < inCart.length; i++) {
-            const docRef = doc(db, 'products', inCart[i])
+        return await Promise.all(inCart.map(async item => {
+            const docRef = doc(db, 'products', item)
             const docSnap = await getDoc(docRef)
-            items.push({...docSnap.data(), productID: docSnap.id})
-        }
-
-        setProducts(items)
+            const docData = {...docSnap.data(), productID: docSnap.id}
+            return docData
+        }))
     }
 
     useEffect(() => {
         requestProduct()
+            .then(data => setProducts(data))
     }, [inCart])
 
     useEffect(() => {
@@ -42,9 +40,7 @@ function Basket() {
 
         useEffect(() => {
             document.addEventListener('mouseup', setDelete)
-            return () => {
-                document.removeEventListener('mouseup', setDelete)
-            }
+            return () => document.removeEventListener('mouseup', setDelete)
         }, [])
 
         return (
@@ -66,7 +62,7 @@ function Basket() {
                     onClick={() => setCounter(counter => counter - 1)}>-
                 </button>
                 <input
-                    onBlur={(e) => e.target.value < 1 ? setCounter(1) : null}
+                    onBlur={(e) => e.target.value < 1 && setCounter(1)}
                     value={counter}
                     onChange={(e) => setCounter(+e.target.value.replace(/\D/, ''))}
                     type="text"/>

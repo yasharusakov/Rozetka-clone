@@ -19,39 +19,22 @@ function Product() {
     const requestProduct = async () => {
         const docRef = doc(db, 'products', productID)
         const docSnap = await getDoc(docRef)
-
-        setProduct(docSnap.data())
+        const docsData = docSnap.data()
+        return docsData
     }
 
     useEffect(() => {
         requestProduct()
+            .then(setProduct)
     }, [])
 
     const routes = [
-        {
-            path: `/p/${productID}`,
-            title: 'Все о товаре'
-        },
-        {
-            path: `/p/${productID}/characteristic`,
-            title: 'Характеристика'
-        },
-        {
-            path: `/p/${productID}/comments`,
-            title: 'Отзывы'
-        },
-        {
-            path: `/p/${productID}/questions`,
-            title: 'Вопросы'
-        },
-        {
-            path: `/p/${productID}/photo`,
-            title: 'Фото'
-        },
-        {
-            path: `/p/${productID}/accessories`,
-            title: 'Покупают вместе'
-        }
+        {path: `/p/${productID}`, title: 'Все о товаре'},
+        {path: `/p/${productID}/characteristic`, title: 'Характеристика'},
+        {path: `/p/${productID}/comments`, title: 'Отзывы'},
+        {path: `/p/${productID}/questions`, title: 'Вопросы'},
+        {path: `/p/${productID}/photo`, title: 'Фото'},
+        {path: `/p/${productID}/accessories`, title: 'Покупают вместе'}
     ]
 
     const isActive = ({isActive}) => isActive ? 'product__navigation__product product__navigation__product_active' : 'product__navigation__product'

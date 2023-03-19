@@ -21,12 +21,10 @@ function Popup({title, name, render}) {
                     setPopup({name: name, type: false})
                 }
             }} className="popup__container">
-                <div
-                    className={name === 'login' || name === 'register' ? 'popup__content login-and-register' : 'popup__content default'}>
+                <div className={name === 'login' || name === 'register' ? 'popup__content login-and-register' : 'popup__content default'}>
                     <div className="popup__control-panel">
                         <div className="popup__control-panel__title">{title}</div>
-                        <div onClick={() => setPopup({name: name, type: false})}
-                             className="popup__control-panel__close">&#x2715;</div>
+                        <div onClick={() => setPopup({name: name, type: false})} className="popup__control-panel__close">&#x2715;</div>
                     </div>
                     <div className="popup__main">
                         {render()}

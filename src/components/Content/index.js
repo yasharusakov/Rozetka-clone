@@ -1,6 +1,5 @@
 import MainSlider from '../MainSlider'
 import Products from '../Products'
-
 import './style.scss'
 
 function Content() {

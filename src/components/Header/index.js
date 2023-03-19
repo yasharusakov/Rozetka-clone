@@ -3,26 +3,19 @@ import basket from '../../assets/resources/images/basket.png'
 import catalog from '../../assets/resources/images/catalog.png'
 import user from '../../assets/resources/images/user.png'
 import rozetka from '../../assets/resources/svg/rozetka.svg'
-
 import {Link} from 'react-router-dom'
-
 import Popup from '../Popup'
 import BurgerPanel from '../BurgerPanel'
 import Catalog from '../Catalog'
 import Login from '../Login'
 import Register from '../Register'
 import Basket from '../Basket'
-
 import {useState} from 'react'
-import {useSelector} from 'react-redux'
-
 import {useNavigate} from 'react-router-dom'
-
-
+import {useSelector} from 'react-redux'
 import useAuthState from '../../hooks/useAuthState'
-
-import './style.scss'
 import {useActions} from '../../hooks/useActions'
+import './style.scss'
 
 function Header() {
     const navigate = useNavigate()
@@ -61,8 +54,7 @@ function Header() {
                 </button>
                 <form onSubmit={redirectToSearch} className="header__search-form">
                     <img src={search} alt="search"/>
-                    <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Я ищу..."
-                           type="text"/>
+                    <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} placeholder="Я ищу..." type="text"/>
                     <button type="submit" className="header__search-form__submit">Найти</button>
                 </form>
                 {

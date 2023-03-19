@@ -1,7 +1,5 @@
 import {useEffect} from 'react'
-
 import Swiper from 'swiper/bundle'
-
 import collection from '../../assets/resources/images/slider/collection.jpg'
 import every from '../../assets/resources/images/slider/every.jpg'
 import galaxy from '../../assets/resources/images/slider/galaxy.jpg'
@@ -12,9 +10,7 @@ import privatbank from '../../assets/resources/images/slider/privatbank.jpg'
 import slmsung from '../../assets/resources/images/slider/slmsung.jpg'
 import prev from '../../assets/resources/images/slider/prev.png'
 import next from '../../assets/resources/images/slider/next.png'
-
 import 'swiper/css/bundle'
-
 import './style.scss'
 
 function MainSlider() {

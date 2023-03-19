@@ -1,10 +1,7 @@
 import {useEffect} from 'react'
-
 import prev from '../../assets/resources/images/slider/prev.png'
 import next from '../../assets/resources/images/slider/next.png'
-
 import Swiper from 'swiper/bundle'
-
 import 'swiper/css/bundle'
 
 function CategoryBigSlider({pictures = []}) {

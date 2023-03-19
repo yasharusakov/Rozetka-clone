@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-
+import {Fragment} from 'react'
 import desktop from '../../assets/resources/images/catalog/desktop.png'
 import console from '../../assets/resources/images/catalog/console.png'
 import iphone from '../../assets/resources/images/catalog/iphone.png'
@@ -7,26 +7,34 @@ import GooglePlay from '../../assets/resources/svg/Google-Play.svg'
 import AppStore from '../../assets/resources/svg/App-Store.svg'
 import mastercard from '../../assets/resources/svg/mastercard.svg'
 import visa from '../../assets/resources/svg/visa.svg'
-
 import './style.scss'
 
 function SideBar() {
+    const details = [
+        {title: 'Информация о компании', links: ['О нас', 'Условия использования сайта', 'Вакансии', 'Контакты']},
+        {title: 'Помощь', links: ['Доставка и оплата', 'Кредит', 'Гарантия', 'Возврат товара', 'Сервисные центры']},
+        {title: 'Сервисы', links: ['Бонусный счёт', 'Rozetka Premium', 'Подарочные сертификаты', 'Rozetka Обмен', 'Туры и отдых']},
+        {title: 'Партнерам', links: ['Продавать на Розетке', 'Сотрудничество с нами', 'Франчайзинг', 'Аренда помещений']}
+    ]
+
+    const catalog = [
+        {to: '/c/computers-notebooks', src: desktop, title: 'Ноутбуки и компьютеры'},
+        {to: '/c/phones', src: iphone, title: 'Смартфоны, ТВ и электроника'},
+        {to: '/c/consoles', src: console, title: 'Товары для геймеров'}
+    ]
+
     return (
         <div className="sidebar">
             <div className="sidebar__container">
                 <div className="sidebar__catalog">
-                    <Link to="/c/computers-notebooks" className="sidebar__catalog-item">
-                        <img src={desktop} alt="desktop" className="sidebar__catalog-item-icon"/>
-                        <span className="sidebar__catalog-item-title">Ноутбуки и компьютеры</span>
-                    </Link>
-                    <a href="" className="sidebar__catalog-item">
-                        <img src={iphone} alt="iphone" className="sidebar__catalog-item-icon"/>
-                        <span className="sidebar__catalog-item-title">Смартфоны, ТВ и электроника</span>
-                    </a>
-                    <a href="" className="sidebar__catalog-item">
-                        <img src={console} alt="console" className="sidebar__catalog-item-icon"/>
-                        <span className="sidebar__catalog-item-title">Товары для геймеров</span>
-                    </a>
+                    {catalog.map(({to, src, title}, i) => {
+                        return (
+                            <Link to={to} className="sidebar__catalog-item">
+                                <img src={src} alt="desktop" className="sidebar__catalog-item-icon"/>
+                                <span className="sidebar__catalog-item-title">{title}</span>
+                            </Link>
+                        )
+                    })}
                 </div>
                 <div className="line"></div>
                 <div className="sidebar__our-apps">
@@ -38,42 +46,20 @@ function SideBar() {
                 </div>
                 <div className="line"></div>
                 <div className="sidebar__information">
-                    <div className="sidebar__information-item">
-                        <div className="sidebar__information-item-title sidebar-title">Информация о компании</div>
-                        <a className="sidebar__information-item-link">О нас</a>
-                        <a className="sidebar__information-item-link">Условия использования сайта</a>
-                        <a className="sidebar__information-item-link">Вакансии</a>
-                        <a className="sidebar__information-item-link">Контакты</a>
-                    </div>
-                    <div className="line"></div>
-                    <div className="sidebar__information-item">
-                        <div className="sidebar__information-item-title sidebar-title">Помощь</div>
-                        <a className="sidebar__information-item-link">Доставка и оплата</a>
-                        <a className="sidebar__information-item-link">Кредит</a>
-                        <a className="sidebar__information-item-link">Гарантия</a>
-                        <a className="sidebar__information-item-link">Возврат товара</a>
-                        <a className="sidebar__information-item-link">Сервисные центры</a>
-                    </div>
-                    <div className="line"></div>
-                    <div className="sidebar__information-item">
-                        <div className="sidebar__information-item-title sidebar-title">Сервисы</div>
-                        <a className="sidebar__information-item-link">Бонусный счёт</a>
-                        <a className="sidebar__information-item-link">Rozetka Premium</a>
-                        <a className="sidebar__information-item-link">Подарочные сертификаты</a>
-                        <a className="sidebar__information-item-link">Rozetka обмен</a>
-                        <a className="sidebar__information-item-link">Туры и отдых</a>
-                    </div>
-                    <div className="line"></div>
-                    <div className="sidebar__information-item">
-                        <div className="sidebar__information-item-title sidebar-title">Партнерам</div>
-                        <a className="sidebar__information-item-link">Продавать на Розетке</a>
-                        <a className="sidebar__information-item-link">Сотрудничество с нами</a>
-                        <a className="sidebar__information-item-link">Подарочные сертификаты</a>
-                        <a className="sidebar__information-item-link">Франчайзинг</a>
-                        <a className="sidebar__information-item-link">Аренда помещений</a>
-                    </div>
+                    {details.map((item, i) => {
+                        return (
+                            <Fragment key={i}>
+                                <div className="sidebar__information-item">
+                                    <div className="sidebar__information-item-title sidebar-title">{item.title}</div>
+                                    {item.links.map((link, i2) => {
+                                        return <a key={i2} className="sidebar__information-item-link">{link}</a>
+                                    })}
+                                </div>
+                                <div className="line"></div>
+                            </Fragment>
+                        )
+                    })}
                 </div>
-                <div className="line"></div>
                 <div className="sidebar__pay">
                     <div className="sidebar__pay__payments">
                         <a className="sidebar__pay__payments__link">
